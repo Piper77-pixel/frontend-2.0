@@ -2,6 +2,7 @@ import 'package:brain_bucks/utils/app_globals.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/prefer.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/dashboard_manager/dashboard_manager.dart';
 import 'package:brain_bucks/view/widgets/bg_image_widget.dart';
@@ -28,65 +29,70 @@ class OnBoardingScreen extends StatelessWidget {
             : onboardingController.currentIndex.value == 2
             ? DefaultImages.p3bgImage
             : DefaultImages.bgImage,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Stack(
-              children: [
-                assetImage(DefaultImages.starCircleAppLogoImage, fit: BoxFit.cover),
-                skipButton(context),
-              ],
-            ),
-            SizedBox(
-              height: 153,
-              child: PageView.builder(
-                controller: onboardingController.pageController,
-                onPageChanged: (index) => onboardingController.currentIndex.value = index,
-                itemCount: onboardingController.onboardingData.length,
-                scrollDirection: Axis.horizontal,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final data = onboardingController.onboardingData[index];
-                  return Padding(padding: const EdgeInsets.symmetric(horizontal: 22), child: assetImage(data["image"]));
-                },
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Stack(
+                  children: [
+                    Center(child: assetImage(DefaultImages.starCircleAppLogoImage, fit: BoxFit.cover)),
+                    skipButton(context),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(24, 0, 24, 40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  onboardingController.currentIndex.value == 0
-                      ? horizontalSpace(0)
-                      : Expanded(
-                          child: CommonThemeButton(
-                            onPressed: onboardingController.currentIndex.value > 0
-                                ? () {
-                                    onboardingController.pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-                                  }
-                                : null,
-                            isBlack: true,
-                            title: AppString.kPrevious,
+              SizedBox(
+                height: 153,
+                child: PageView.builder(
+                  controller: onboardingController.pageController,
+                  onPageChanged: (index) => onboardingController.currentIndex.value = index,
+                  itemCount: onboardingController.onboardingData.length,
+                  scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final data = onboardingController.onboardingData[index];
+                    return Padding(padding: const EdgeInsets.symmetric(horizontal: 22), child: assetImage(data["image"]));
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(24, 16, 24, Get.height * 0.05),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    onboardingController.currentIndex.value == 0
+                        ? horizontalSpace(0)
+                        : Expanded(
+                            child: CommonThemeButton(
+                              onPressed: onboardingController.currentIndex.value > 0
+                                  ? () {
+                                      onboardingController.pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                                    }
+                                  : null,
+                              isBlack: true,
+                              title: AppString.kPrevious,
+                            ),
                           ),
-                        ),
-                  if (onboardingController.currentIndex.value != 0) horizontalSpace(16),
-                  Expanded(
-                    child: CommonThemeButton(
-                      onPressed: () {
-                        if (onboardingController.currentIndex.value == onboardingController.onboardingData.length - 1) {
-                          // Last page → navigate
-                          navigatePushAndRemoveUntil(context, DashboardManager());
-                        } else {
-                          onboardingController.pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-                        }
-                      },
-                      title: onboardingController.currentIndex.value == onboardingController.onboardingData.length - 1 ? AppString.kStart : AppString.kNext,
+                    if (onboardingController.currentIndex.value != 0) horizontalSpace(16),
+                    Expanded(
+                      child: CommonThemeButton(
+                        onPressed: () {
+                          if (onboardingController.currentIndex.value == onboardingController.onboardingData.length - 1) {
+                            // Last page → navigate
+                            Prefs.setONBOARDING(true);
+                            navigatePushAndRemoveUntil(context, DashboardManager());
+                          } else {
+                            onboardingController.pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                          }
+                        },
+                        title: onboardingController.currentIndex.value == onboardingController.onboardingData.length - 1 ? AppString.kStart : AppString.kNext,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     });
@@ -100,7 +106,7 @@ class OnBoardingScreen extends StatelessWidget {
           navigatePushAndRemoveUntil(context, DashboardManager());
         },
         child: Padding(
-          padding: const EdgeInsets.only(right: 8.0),
+          padding: const EdgeInsets.only(right: 10),
           child: Text(
             AppString.kSkip.tr,
             style: pRobotoRegular10.copyWith(

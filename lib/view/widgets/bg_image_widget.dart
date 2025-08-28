@@ -24,7 +24,7 @@ class BgImageWidget extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(image: AssetImage(bgImage??DefaultImages.bgImage), fit: BoxFit.fill),
         ),
-        child: SafeArea(child: child),
+        child: child,
       ),
       floatingActionButton: floatingActionButton,
       floatingActionButtonLocation: floatingActionButtonLocation,

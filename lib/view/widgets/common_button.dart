@@ -3,6 +3,7 @@ import 'package:brain_bucks/utils/app_globals.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,7 +49,7 @@ class CommonThemeButton extends StatelessWidget {
       onPressed: onPressed,
       child: Container(
         width: width ?? Get.width,
-        height: height ?? 48,
+        height: height ?? 56,
         decoration: BoxDecoration(
           // color: btnColor ?? AppColors.kThemeColor,
           // color: isBlack == true ? AppColors.kLightBlack : AppColors.kThemeColor,
@@ -60,8 +61,8 @@ class CommonThemeButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (icon != null) SizedBox(width: 20, height: 20, child: Image.asset(icon!)),
-              if (icon != null) horizontalSpace(horizontal ?? 10),
+              if (icon != null) SizedBox(width: 28, height: 28, child: assetImage(icon!)),
+              if (icon != null) horizontalSpace(horizontal ?? 8),
               Text(
                 title!,
                 style: pNunitoBold10.copyWith(
@@ -118,7 +119,7 @@ class CommonButton extends StatelessWidget {
       onPressed: onPressed,
       child: Container(
         width: width ?? Get.width,
-        height: height ?? 49,
+        height: height ?? 45,
         decoration: BoxDecoration(
           color: btnColor ?? AppColors.kThemeColor,
           borderRadius: BorderRadius.circular(radius ?? AppDimen.buttonRadius),
@@ -129,12 +130,12 @@ class CommonButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (icon != null) SizedBox(width: 20, height: 20, child: Image.asset(icon!)),
-              if (icon != null) horizontalSpace(10),
+              if (icon != null) horizontalSpace(8),
               Text(
                 title!,
-                style: pNunitoBold10.copyWith(
+                style: pRobotoBold10.copyWith(
                   color: textColor ?? AppColors.kFont,
-                  fontSize: fontSize ?? 22, //14
+                  fontSize: fontSize ?? 16, //14
                   fontWeight: fontWeight,
                 ),
                 textAlign: TextAlign.center,

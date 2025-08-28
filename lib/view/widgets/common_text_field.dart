@@ -2,6 +2,7 @@ import 'package:brain_bucks/utils/app_globals.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
 class CommonTextField extends StatefulWidget {
@@ -33,6 +34,9 @@ class CommonTextField extends StatefulWidget {
   final bool? isFilledColor;
   final bool? isText;
   final double? bottom;
+  final double? fontSize;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextAlign textAlign;
 
   const CommonTextField({
     super.key,
@@ -64,6 +68,9 @@ class CommonTextField extends StatefulWidget {
     this.isText = false,
     this.prefixWidget,
     this.bottom,
+    this.inputFormatters,
+    this.textAlign = TextAlign.start,
+    this.fontSize,
   });
 
   @override
@@ -98,7 +105,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: widget.bottom ?? 16),
+      padding: EdgeInsets.only(bottom: widget.bottom ?? 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -124,6 +131,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
               cursorColor: widget.cursorColor ?? AppColors.kThemeColor,
               autofocus: widget.autofocus ?? false,
               focusNode: _focus,
+              inputFormatters: widget.inputFormatters,
               // enabled: widget.enabled,
               readOnly: widget.readOnly ?? false,
               validator: (v) {
@@ -148,9 +156,10 @@ class _CommonTextFieldState extends State<CommonTextField> {
               keyboardType: widget.keyboardType,
               textInputAction: TextInputAction.done,
               textCapitalization: TextCapitalization.words,
+              textAlign: widget.textAlign,
               style: widget.obscureText == true
                   ? TextStyle(color: widget.textColor ?? AppColors.kFont, fontFamily: 'Roboto')
-                  : pLatoSemiBold10.copyWith(color: widget.textColor ?? AppColors.kFont, fontSize: 14),
+                  : pLatoSemiBold10.copyWith(color: widget.textColor ?? AppColors.kFont, fontSize: widget.fontSize ?? 14),
               decoration: InputDecoration(
                 fillColor: widget.filledColor ?? AppColors.kTextField,
                 filled: widget.isFilledColor ?? true,
@@ -158,8 +167,8 @@ class _CommonTextFieldState extends State<CommonTextField> {
                 labelStyle: pLatoRegular10.copyWith(color: widget.textColor ?? AppColors.kLabel),
                 hintStyle: pLatoSemiBold10.copyWith(color: widget.textColor ?? AppColors.cHintTxt, fontSize: 14),
                 counterText: '',
-                errorStyle: TextStyle(height: 0, fontSize: 0, decorationThickness: 0),
-                counterStyle: TextStyle(height: 0, fontSize: 0, decorationThickness: 0),
+                errorStyle: TextStyle(height: 0, fontSize: 0),
+                counterStyle: TextStyle(height: 0, fontSize: 0),
                 prefixIcon: widget.isText == true
                     ? Padding(padding: const EdgeInsets.only(left: 8.0), child: widget.prefixWidget)
                     : widget.prefix == null
@@ -177,7 +186,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
                   borderRadius: BorderRadius.circular(radius),
                 ),
                 enabledBorder: GradientOutlineInputBorder(
-                  gradient: LinearGradient(colors: AppColors.linerSelectedTextFieldBorderColor, begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                  gradient: LinearGradient(colors: AppColors.linerTextFieldBorderColor, begin: Alignment.topCenter, end: Alignment.bottomCenter),
                   width: 1,
                   borderRadius: BorderRadius.circular(radius),
                 ),
@@ -186,25 +195,10 @@ class _CommonTextFieldState extends State<CommonTextField> {
                   width: 1,
                   borderRadius: BorderRadius.circular(radius),
                 ),
-                // border: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(radius),
-                //   borderSide: BorderSide(color: widget.bColor ?? AppColors.cBorder, width: 1),
-                // ),
-                // enabledBorder: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(radius),
-                //   borderSide: BorderSide(color: widget.bColor ?? AppColors.cBorder, width: 1),
-                // ),
-                // errorBorder: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(radius),
-                //   borderSide: BorderSide(color: widget.bColor ?? AppColors.cBorder),
-                // ),
-                // disabledBorder: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(radius),
-                //   borderSide: BorderSide(color: widget.bColor ?? AppColors.cBorder, width: 1),
-                // ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: GradientOutlineInputBorder(
+                  gradient: LinearGradient(colors: AppColors.linerSelectedTextFieldBorderColor, begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                  width: 1,
                   borderRadius: BorderRadius.circular(radius),
-                  borderSide: BorderSide(color: widget.bColor ?? AppColors.kThemeColor, width: 1),
                 ),
               ),
             ),

@@ -16,3 +16,7 @@ TextStyle pLatoSemiBold10 = TextStyle(fontSize: 10, color: AppColors.kFont, font
 TextStyle pRobotoBold10 = TextStyle(fontSize: 10, color: AppColors.kFont, fontWeight: FontWeight.w700, fontFamily: 'Roboto');
 TextStyle pNunitoBold10 = TextStyle(fontSize: 10, color: AppColors.kFont, fontWeight: FontWeight.w700, fontFamily: 'Nunito');
 TextStyle pLatoBold10 = TextStyle(fontSize: 10, color: AppColors.kFont, fontWeight: FontWeight.w700, fontFamily: 'Lato');
+
+TextStyle pRobotoExtraBold10 = TextStyle(fontSize: 10, color: AppColors.kFont, fontWeight: FontWeight.w900, fontFamily: 'Roboto');
+TextStyle pNunitoExtraBold10 = TextStyle(fontSize: 10, color: AppColors.kFont, fontWeight: FontWeight.w900, fontFamily: 'Nunito');
+TextStyle pLatoExtraBold10 = TextStyle(fontSize: 10, color: AppColors.kFont, fontWeight: FontWeight.w900, fontFamily: 'Lato');

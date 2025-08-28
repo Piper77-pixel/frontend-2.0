@@ -1,4 +1,5 @@
 import 'package:brain_bucks/utils/colors.dart';
+import 'package:brain_bucks/view/screen/dashboard_manager/dashboard_manager.dart';
 import 'package:brain_bucks/view/screen/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ class BrainBuckApp extends StatelessWidget {
 
       ),
       home: SplashScreen(),
+      // home: DashboardManager(index: 0,),
     );
   }
 }

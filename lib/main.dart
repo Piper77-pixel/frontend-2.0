@@ -15,6 +15,9 @@ Future<void> main() async {
     SystemUiOverlayStyle(
       statusBarColor: AppColors.kTransparent, // Transparent status bar
       systemNavigationBarColor: AppColors.kBackGround, // Black navigation bar
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
     ),
   );
   await GetStorage.init();

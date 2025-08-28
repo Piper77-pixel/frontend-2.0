@@ -1,23 +1,39 @@
 class AppString {
   static String kStart = 'START';
   static String kNext = 'NEXT';
-  static String kPrevious= 'PREVIOUS';
+  static String kPrevious = 'PREVIOUS';
 
   static String kWelcome = 'Welcome!';
-  static String kEnterName = 'Enter Name';
+  static String kEnterName = 'Enter your username';
+  static String kUsername = 'Username';
   static String kEmailAddress = 'Email Address';
-  static String kEnterPassword = 'Enter Password';
-  static String kConfirmPassword = 'Confirm Password';
-  static String kSignInWithGoogle = 'Sign In with Google';
-  static String kSignInWithApple = 'Sign In with Apple';
+  static String kConfirmPassword = 'Confirm Your Password';
+  static String kContinueWithGoogle = 'Continue with Google';
+  static String kContinueWithApple = 'Continue with Apple';
   static String kDontHaveAc = 'Don’t have an account? ';
-  static String kHaveAc = 'Already have an account? ';
-  static String kSignUp = 'Sign Up';
-  static String kSignIn = 'Sign In';
-  static String kLogin = 'Login';
+  static String kExistingUser = 'Existing user? - ';
+  static String kSignUp = 'sign Up';
+  static String kSignIn = 'sign In';
   static String kQuitGame = 'Quit Game';
 
-  static String kGetACode = 'Get a Code';
+  static String kRegister = 'Register';
+  static String kLogin = 'Login';
+  static String kLOGIN = 'LOGIN';
+  static String kGetACode = 'GET A CODE';
+  static String kSend = 'SEND';
   static String kSkip = 'Skip';
-  static String k = '';
+  static String kHome = 'Home';
+  static String kExplore = 'Explore';
+  static String kChallenges = 'Challenges';
+  static String kProfile = 'Profile';
+  static String kEnterYourEmail = 'Enter your email';
+  static String kPassword = 'Password';
+  static String kRememberMe  = 'Remember Me';
+  static String kForgotPassword = 'Forgot Password ?';
+  static String kOr = 'Or';
+  static String kOneTimePassword = 'One Time Password';
+  static String kEnterYourDigitCode = 'Enter your 6-digit code.';
+  static String kResendCode = 'Resend code?';
+  static String kForgotPasswordTitle = 'Forgot Password';
+  static String kEnterYourEmailAddressToResetYourPassword = 'Enter your email address to reset your password.';
 }

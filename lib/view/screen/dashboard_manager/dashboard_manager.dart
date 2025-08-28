@@ -1,10 +1,14 @@
 import 'package:brain_bucks/core/controller/dashboard_controller.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/prefer.dart';
 import 'package:brain_bucks/utils/text_style.dart';
+import 'package:brain_bucks/view/screen/auth/show_auth_dialog.dart';
 import 'package:brain_bucks/view/widgets/bg_image_widget.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
+import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 // import 'package:stage_navigation_bar/stage_navigation_bar.dart';
@@ -30,36 +34,81 @@ class _DashboardManagerState extends State<DashboardManager> {
 
   @override
   Widget build(BuildContext context) {
-    return BgImageWidget(child: Text("data"));
-    // return Obx(() {
-    //   return Container(
-    //     height: Get.height,
-    //     width: Get.width,
-    //     decoration: BoxDecoration(
-    //       image: DecorationImage(image: AssetImage(DefaultImages.bgImage), fit: BoxFit.fill),
-    //     ),
-    //     child: SafeArea(
-    //       child: Scaffold(
-    //         backgroundColor: AppColors.kTransparent,
-    //         // body: dashboardController.itemList[dashboardController.selectedIndex.value]['screen'],
-    //         bottomNavigationBar: Padding(
-    //           padding: const EdgeInsets.fromLTRB(20, 0, 20, 5), // padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-    //         ),
-    //       ),
-    //     ),
-    //   );
-    // });
+    return Obx(() {
+      return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: AppColors.kTransparent,
+          // Transparent status bar
+          systemNavigationBarColor: AppColors.kBlack,
+          // Black navigation bar
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+        ),
+        child: Container(
+          height: Get.height,
+          width: Get.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(DefaultImages.bgImage), fit: BoxFit.fill),
+          ),
+          child: Scaffold(
+            backgroundColor: AppColors.kTransparent,
+            body: dashboardController.itemList[dashboardController.selectedIndex.value]['screen'],
+            bottomNavigationBar: Container(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+              decoration: BoxDecoration(
+                color: AppColors.kBottomNavibar,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                border: Border(top: BorderSide(color: AppColors.kWhite.withOpacity(0.1))),
+              ),
+              child: SafeArea(
+                child: Obx(() {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(dashboardController.itemList.length, (index) {
+                      var dict = dashboardController.itemList[index];
+                      return itemWidget(dict, dashboardController.selectedIndex.value == index, () {
+                        if (index == 0) {
+                          dashboardController.selectedIndex.value = index;
+                        } else {
+                          if (Prefs.getAccessToken() == '' || Prefs.getAccessToken().isEmpty) {
+                            showLoginSignupDialog(context);
+                          } else {
+                        dashboardController.selectedIndex.value = index;
+                        }
+                        }
+                      });
+                    }),
+                  );
+                }),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
   }
 
-  Column itemWidget(dict, Color cFont) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(dict['icn'], color: cFont, width: 17, height: 17),
-        verticalSpace(4),
-        Text(dict['title'], style: pNunitoSemiBold10.copyWith(color: cFont ?? AppColors.kWhite.withOpacity(0.4))),
-      ],
+  Widget itemWidget(dict, bool isSelected, Function() onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 80,
+        decoration: BoxDecoration(
+          image: isSelected ? DecorationImage(image: AssetImage(DefaultImages.selectedTabIcon), fit: BoxFit.fill) : null,
+        ),
+        padding: EdgeInsets.symmetric(vertical: 6),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            assetImage(dict['icn'], h: 27, w: 27),
+            verticalSpace(6),
+            Text(dict['title'], style: isSelected ? pRobotoMedium10.copyWith(fontSize: 14) : pRobotoRegular10.copyWith(fontSize: 14, color: AppColors.kGreyFont)),
+          ],
+        ),
+      ),
     );
   }
 }
