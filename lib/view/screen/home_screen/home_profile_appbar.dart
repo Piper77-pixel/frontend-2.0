@@ -23,7 +23,6 @@ class HomeProfileAppbar extends StatelessWidget {
         Container(
           // height: 150,
           height: Get.height * 0.18,
-          //150,
           width: Get.width,
           decoration: BoxDecoration(
             // color: Colors.red,

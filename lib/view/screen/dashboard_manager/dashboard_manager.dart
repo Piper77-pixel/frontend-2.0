@@ -58,8 +58,8 @@ class _DashboardManagerState extends State<DashboardManager> {
               padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
               decoration: BoxDecoration(
                 color: AppColors.kBottomNavibar,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                border: Border(top: BorderSide(color: AppColors.kWhite.withOpacity(0.1))),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                border: Border(top: BorderSide(color: AppColors.kWhite.withOpacity(0.2))),
               ),
               child: SafeArea(
                 child: Obx(() {

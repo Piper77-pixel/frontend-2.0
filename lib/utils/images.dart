@@ -5,14 +5,37 @@ class DefaultImages {
   static String homeBgImage = 'assets/images/home_bg.png';
   static String dialogBgImage = "assets/images/dialog_bg.png";
   static String appbarBgImage = "assets/images/appbar_bg.png";
+  static String coinBgImage = "assets/images/coin_bg.png";
+  static String sparkBgImage = "assets/images/spark_bg.png";
+  static String soloSessionBgImage = "assets/images/solo_session_bg.png";
+  static String timeBlitzSessionBgImage = "assets/images/time_blitz_session_bg.png";
+  static String topicMasterySessionBgImage = "assets/images/topic_mastery_session_bg.png";
   static String appbarProfileBg = 'assets/images/appbar_profile.png';
   static String playLikeMillionaireImage = 'assets/images/play_like_m.png';
   static String playLikeGeniusImage = 'assets/images/play_like_g.png';
   static String dominateDuelImage = 'assets/images/dominate_duel.png';
   static String greyButtonImage = 'assets/images/grey_button.png';
+  static String singleButtonImage = 'assets/images/single_button.png';
   static String themeButtonImage = 'assets/images/theme_button.png';
   static String circleAppLogoImage = 'assets/images/circle_logo.png';
   static String starCircleAppLogoImage = 'assets/images/starts_circle_logo.png';
+  static String circleSingleImage = 'assets/images/circle_single.png';
+  static String circleDuelImage = 'assets/images/circle_duel.png';
+  static String leftCrownImage = 'assets/images/left_crown.png';
+  static String rightCrownImage = 'assets/images/right_crown.png';
+  static String homeLeftImage = 'assets/images/home_left.png';
+  static String homeRightImage = 'assets/images/home_right.png';
+  static String homeWinConfettiImage = 'assets/images/home_win_confetti.png';
+  static String vsImage = 'assets/images/vs.png';
+  static String soloStreakImage = 'assets/images/solo_streak.png';
+  static String topicMasteryImage = 'assets/images/topic_mastery.png';
+  static String timeBlitzImage = 'assets/images/time_blitz.png';
+  static String crownImage = 'assets/images/crown.png';
+  static String trofyImage = 'assets/images/trofy.png';
+  static String winnerBannerImage = 'assets/images/winner_banner.png';
+  static String winnerConfettimage = 'assets/images/winner_confetti.png';
+  static String challengeExpireBgImage = 'assets/images/challenge_expire_bg.png';
+  static String challengeStageImage = 'assets/images/challenge_stage.png';
 
   static String tabHomeIcon = 'assets/icons/tab_home.png';
   static String tabChallengesIcon = 'assets/icons/tab_challenges.png';
@@ -20,6 +43,7 @@ class DefaultImages {
   static String tabProfileIcon = 'assets/icons/tab_profile.png';
   static String selectedTabIcon = 'assets/icons/selected_tab.png';
   static String coinIcon = 'assets/icons/ic_coin.png';
+  static String sparkIcon = 'assets/icons/ic_spark.png';
   static String mainIcon = 'assets/icons/ic_mail.png';
   static String eyeIcon = 'assets/icons/ic_eye.png';
   static String offEyeIcon = 'assets/icons/ic_off_eye.png';
@@ -27,7 +51,15 @@ class DefaultImages {
   static String loginIcon = 'assets/icons/ic_login.png';
   static String appleIcon = 'assets/icons/ic_apple.png';
   static String googleIcon = 'assets/icons/ic_google.png';
+  static String tickCircleIcon = 'assets/icons/tick_circle.png';
+  static String closeCircleIcon = 'assets/icons/close_circle.png';
+  static String playIcon = 'assets/icons/ic_play.png';
+  static String lockIcon = 'assets/icons/lock.png';
+  static String lock3DIcon = 'assets/icons/ic_3d_lock.png';
 
   ///dummy images
   static String profileImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW15BUXwvNHIpWR-nwmxAaGFIMCqM8AycwRolhIw8NsR0iU63l19H3EQxkudHEyrnZ4vY&usqp=CAU';
+  static String profile1Image = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRP-qCaX7z5Oq74ALuBTDkLA1irIRdV2CtGdNSNQ7-_6xpvNPyo';
+  static String summerChallengeImage = 'assets/dummy_image/summer_challenge.png';
+  static String springChallengeImage = 'assets/dummy_image/spring_challenge.png';
 }

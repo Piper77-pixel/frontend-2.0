@@ -28,7 +28,7 @@ class AppString {
   static String kProfile = 'Profile';
   static String kEnterYourEmail = 'Enter your email';
   static String kPassword = 'Password';
-  static String kRememberMe  = 'Remember Me';
+  static String kRememberMe = 'Remember Me';
   static String kForgotPassword = 'Forgot Password ?';
   static String kOr = 'Or';
   static String kOneTimePassword = 'One Time Password';
@@ -36,4 +36,18 @@ class AppString {
   static String kResendCode = 'Resend code?';
   static String kForgotPasswordTitle = 'Forgot Password';
   static String kEnterYourEmailAddressToResetYourPassword = 'Enter your email address to reset your password.';
+  static String kDAYS = 'DAYS';
+  static String kHOURS = 'HOURS';
+  static String kMINUTES = 'MINUTES';
+  static String kSECONDS = 'SECONDS';
+  static String kEnrolNow = 'Enrol now';
+  static String kStartADuel = 'START A DUEL';
+  static String kStartASingle = 'START A SINGLE';
+  static String kLevel = 'Level';
+  static String kSinglePlayerGame= 'Single player game';
+  static String kSoloStreakSession = 'Solo Streak Session';
+  static String kTopicMasterySession = 'Topic Mastery Session';
+  static String kTimeBlitzSession = 'Time Blitz Session';
+  static String kPlayGame = 'PLAY GAME';
+  static String k = '';
 }

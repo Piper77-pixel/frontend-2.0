@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 class CommonThemeButton extends StatelessWidget {
   final String? title;
+  final String? bgImage;
   final String? icon;
   final double? height;
   final double? width;
@@ -38,6 +39,7 @@ class CommonThemeButton extends StatelessWidget {
     this.fontWeight,
     this.isBlack = false,
     this.icon,
+    this.bgImage,
   });
 
   @override
@@ -52,8 +54,17 @@ class CommonThemeButton extends StatelessWidget {
         height: height ?? 56,
         decoration: BoxDecoration(
           // color: btnColor ?? AppColors.kThemeColor,
-          // color: isBlack == true ? AppColors.kLightBlack : AppColors.kThemeColor,
-          image: DecorationImage(image: AssetImage(isBlack ? DefaultImages.greyButtonImage : DefaultImages.themeButtonImage), fit: BoxFit.fill),
+          color: isBlack == true ? AppColors.kText : AppColors.kThemeColor,
+          image: DecorationImage(
+            image: AssetImage(
+              bgImage == null
+                  ? isBlack
+                        ? DefaultImages.greyButtonImage
+                        : DefaultImages.themeButtonImage
+                  : bgImage!,
+            ),
+            fit: BoxFit.fill,
+          ),
           borderRadius: BorderRadius.circular(radius ?? AppDimen.buttonRadius),
           border: Border.all(color: bColor ?? AppColors.kTransparent),
         ),
@@ -68,7 +79,7 @@ class CommonThemeButton extends StatelessWidget {
                 style: pNunitoBold10.copyWith(
                   color: textColor ?? AppColors.kFont,
                   fontSize: fontSize ?? 22, //14
-                  fontWeight: fontWeight??FontWeight.w900,
+                  fontWeight: fontWeight ?? FontWeight.w900,
                 ),
                 textAlign: TextAlign.center,
               ),

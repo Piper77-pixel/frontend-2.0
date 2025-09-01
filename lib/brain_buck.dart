@@ -16,8 +16,8 @@ class BrainBuckApp extends StatelessWidget {
         iconTheme: IconThemeData(color: AppColors.kThemeFont),
 
       ),
-      home: SplashScreen(),
-      // home: DashboardManager(index: 0,),
+      // home: SplashScreen(),
+      home: DashboardManager(index: 0,),
     );
   }
 }
