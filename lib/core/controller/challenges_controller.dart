@@ -2,7 +2,7 @@ import 'package:brain_bucks/utils/images.dart';
 import 'package:get/get.dart';
 
 class ChallengesController extends GetxController {
-  final List<Challenge> challenges = [
+ RxList<Challenge> challenges = [
     Challenge(
       title: "Summer Challenge",
       background: DefaultImages.summerChallengeImage,
@@ -12,6 +12,7 @@ class ChallengesController extends GetxController {
       seconds: 60,
       coins: 1138,
       energy: 2128,
+       isEnable: true
     ),
     Challenge(
       title: "Spring Challenge",
@@ -22,8 +23,9 @@ class ChallengesController extends GetxController {
       seconds: 60,
       coins: 1138,
       energy: 2128,
+      isEnable: true
     ),
-  ];
+  ].obs;
 
 
 }
@@ -37,6 +39,7 @@ class Challenge {
   final int coins;
   final int energy;
   final String buttonText;
+   bool isEnable;
 
   Challenge({
     required this.title,
@@ -48,5 +51,6 @@ class Challenge {
     required this.coins,
     required this.energy,
     this.buttonText = "Enrol now",
+    this.isEnable = true,
   });
 }

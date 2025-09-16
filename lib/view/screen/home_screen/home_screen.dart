@@ -9,6 +9,7 @@ import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/prefer.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/show_auth_dialog.dart';
+import 'package:brain_bucks/view/screen/home_screen/duel_player_dialog.dart';
 import 'package:brain_bucks/view/screen/home_screen/home_profile_appbar.dart';
 import 'package:brain_bucks/view/screen/home_screen/home_screen_widgets.dart';
 import 'package:brain_bucks/view/screen/home_screen/single_player_dialog.dart';
@@ -52,6 +53,7 @@ class HomeScreen extends StatelessWidget {
                       showLoginSignupDialog(context);
                     } else {
                       showMessage("Duel Tap ⚜️");
+                      showPlayerDialog(context, DuelPlayerDialog());
                     }
                   },
                   bgImage: Prefs.getAccessToken() == '' || Prefs.getAccessToken().isEmpty ? DefaultImages.greyButtonImage : null,
@@ -61,7 +63,8 @@ class HomeScreen extends StatelessWidget {
                 startDuelBtn(
                   title: AppString.kStartASingle.tr,
                   onTap: () {
-                    showShinglePlayerDialog(context);
+                    showMessage("🔆❔Single Player Dialog");
+                    showPlayerDialog(context, SinglePlayerDialog());
                   },
                   isSingle: true,
                 ),
@@ -187,7 +190,7 @@ class HomeScreen extends StatelessWidget {
           Container(
             width: Get.width,
             decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(DefaultImages.winnerConfettimage)),
+              image: DecorationImage(image: AssetImage(DefaultImages.winnerConfettiImage)),
               gradient: LinearGradient(colors: AppColors.linerGameColor, begin: AlignmentGeometry.topCenter, end: AlignmentGeometry.bottomCenter),
               borderRadius: BorderRadius.circular(16),
               border: GradientBoxBorder(

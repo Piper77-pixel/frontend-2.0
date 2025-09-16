@@ -16,6 +16,8 @@ class AppColors {
   static Color kHex287E36 = Color(0xff287E36);
   static Color kHex291139 = Color(0xff291139);
   static Color kHexAB1DFF = Color(0xffAB1DFF);
+  static Color kHex7C10F9 = Color(0xff7C10F9);
+  static Color kHex0A020E = Color(0xff0A020E);
   static Color kHex = Color(0xff);
 
   static Color kAnswerBg = Color(0xff282828);
@@ -40,6 +42,7 @@ class AppColors {
   static Color cLoader = kThemeColor;
   static List<Color> linerCoinColor = [Color(0xffFFFFFF).withOpacity(0.01), Color(0xffFFFFFF).withOpacity(0.1)];
   static List<Color> linerBtnColor = [Color(0xff3B1568), Color(0xff7429CE)];
+  static List<Color> linerCircleColor = [Color(0xffDA9CFD), Color(0xff952AD4)];
   static List<Color> linerGameColor = [Color(0xff291139), Color(0xff15091E)];
   static List<Color> linerAppBarColor = [Color(0xff15091E), Color(0xff382245)];
   static List<Color> linerAppBarBorderColor = [Color(0xffB330FF), Color(0xff4D2266), Color(0xffB330FF)];

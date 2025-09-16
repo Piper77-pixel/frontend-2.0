@@ -1,15 +1,18 @@
 import 'package:brain_bucks/utils/app_globals.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
+import 'package:brain_bucks/utils/icons.dart';
 import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/prefer.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/dashboard_manager/dashboard_manager.dart';
+import 'package:brain_bucks/view/screen/onboarding_screen/onboarding1.dart';
 import 'package:brain_bucks/view/widgets/bg_image_widget.dart';
 import 'package:brain_bucks/view/widgets/common_button.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../core/controller/onboarding_controller.dart';
@@ -21,62 +24,53 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return BgImageWidget(
-        // padding: EdgeInsets.fromLTRB(24, 0, 25, 40),
-        bgImage: onboardingController.currentIndex.value == 0
-            ? DefaultImages.p1bgImage
-            : onboardingController.currentIndex.value == 2
-            ? DefaultImages.p3bgImage
-            : DefaultImages.bgImage,
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    Center(child: assetImage(DefaultImages.starCircleAppLogoImage, fit: BoxFit.cover)),
-                    skipButton(context),
-                  ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        // Transparent status bar
+        systemNavigationBarColor: Colors.black,
+        // Black navigation bar
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+      ),
+      child: Obx(() {
+        return BgImageWidget(
+          // padding: EdgeInsets.fromLTRB(24, 0, 25, 40),
+          bgImage: onboardingController.currentIndex.value == 0
+              ? DefaultImages.p1bgImage
+              : onboardingController.currentIndex.value == 2
+              ? DefaultImages.p1bgImage
+              : DefaultImages.p2bgImage,
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: PageView.builder(
+                    controller: onboardingController.pageController,
+                    onPageChanged: (index) => onboardingController.currentIndex.value = index,
+                    itemCount: onboardingController.onboardingData.length,
+                    scrollDirection: Axis.horizontal,
+                    // physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final data = onboardingController.onboardingData[index];
+                      return index == 0
+                          ? Onboarding1(data: data)
+                          : index == 1
+                          ? Onboarding2(data: data)
+                          : Onboarding3(data: data);
+                    },
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 153,
-                child: PageView.builder(
-                  controller: onboardingController.pageController,
-                  onPageChanged: (index) => onboardingController.currentIndex.value = index,
-                  itemCount: onboardingController.onboardingData.length,
-                  scrollDirection: Axis.horizontal,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final data = onboardingController.onboardingData[index];
-                    return Padding(padding: const EdgeInsets.symmetric(horizontal: 22), child: assetImage(data["image"]));
-                  },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(24, 16, 24, Get.height * 0.05),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    onboardingController.currentIndex.value == 0
-                        ? horizontalSpace(0)
-                        : Expanded(
-                            child: CommonThemeButton(
-                              onPressed: onboardingController.currentIndex.value > 0
-                                  ? () {
-                                      onboardingController.pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-                                    }
-                                  : null,
-                              isBlack: true,
-                              title: AppString.kPrevious,
-                            ),
-                          ),
-                    if (onboardingController.currentIndex.value != 0) horizontalSpace(16),
-                    Expanded(
-                      child: CommonThemeButton(
-                        onPressed: () {
+                Padding(
+                  padding: EdgeInsets.fromLTRB(32, Get.height * 0.072, 32, Get.height * 0.02),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      skipButton(context),
+                      GestureDetector(
+                        onTap: () {
                           if (onboardingController.currentIndex.value == onboardingController.onboardingData.length - 1) {
                             // Last page → navigate
                             Prefs.setONBOARDING(true);
@@ -85,17 +79,23 @@ class OnBoardingScreen extends StatelessWidget {
                             onboardingController.pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
                           }
                         },
-                        title: onboardingController.currentIndex.value == onboardingController.onboardingData.length - 1 ? AppString.kStart : AppString.kNext,
+                        child: Container(
+                          height: 90,
+                          width: 90,
+                          decoration: BoxDecoration(image: DecorationImage(image: AssetImage(DefaultImages.onboardingBtnImage))),
+                          child: Center(child: Icon(onboardingController.currentIndex.value == onboardingController.onboardingData.length - 1 ? icnDone : icnNext, color: AppColors.kWhite)),
+                        ),
                       ),
-                    ),
-                  ],
+                      DotIndicator(itemCount: onboardingController.onboardingData.length, currentIndex: onboardingController.currentIndex.value),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 
   Align skipButton(BuildContext context) {
@@ -118,6 +118,28 @@ class OnBoardingScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class DotIndicator extends StatelessWidget {
+  final int itemCount;
+  final int currentIndex;
+
+  const DotIndicator({super.key, required this.itemCount, required this.currentIndex});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(itemCount, (index) {
+        return Container(
+          width: index == currentIndex ? 32 : 6,
+          height: 6,
+          margin: EdgeInsets.symmetric(horizontal: 4), // Adjust spacing
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: index == currentIndex ? AppColors.kHex7C10F9 : AppColors.kWhite),
+        );
+      }),
     );
   }
 }

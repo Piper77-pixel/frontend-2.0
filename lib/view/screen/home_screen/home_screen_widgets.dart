@@ -8,7 +8,7 @@ import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, totalSpark, bgImage, Function()? onTap}) {
+Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, totalSpark, bgImage, Function()? onTap, bool? isEnable = true}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 8.0),
     child: Container(
@@ -49,7 +49,8 @@ Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, to
               width: 120,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                gradient: LinearGradient(colors: AppColors.linerBtnColor, begin: Alignment.topLeft, end: Alignment.bottomRight),
+                color: isEnable == false ? AppColors.kAnswerBg : null,
+                gradient: isEnable == true ? LinearGradient(colors: AppColors.linerBtnColor, begin: Alignment.topLeft, end: Alignment.bottomRight) : null,
               ),
               child: Center(
                 child: Text(
@@ -61,7 +62,7 @@ Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, to
                         colors: <Color>[AppColors.kFont, AppColors.kGreyBorder],
                         begin: AlignmentGeometry.topCenter,
                         end: AlignmentGeometry.bottomCenter,
-                      ).createShader(Rect.fromLTWH(0, 25, 0, 200)),
+                      ).createShader(Rect.fromLTWH(0, 150, 0, 200)),
                   ),
                 ),
               ),
@@ -73,21 +74,22 @@ Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, to
   );
 }
 
-Widget shadowCoinWidget(String total, {bool isSpark = false}) {
+Widget shadowCoinWidget(String total, {bool isSpark = false, bool isIcon = true, double? font, double? icon, double? height, String? bg}) {
   return Container(
-    height: 24,
+    height: height ?? 24,
     // width: 60,
     decoration: BoxDecoration(
       // color: AppColors.kBlack.withOpacity(0.15),
       borderRadius: BorderRadius.circular(35),
-      image: DecorationImage(image: AssetImage(isSpark ? DefaultImages.sparkBgImage : DefaultImages.coinBgImage), fit: BoxFit.fill),
+      image: DecorationImage(image: AssetImage(bg ?? (isSpark ? DefaultImages.sparkBgImage : DefaultImages.coinBgImage)), fit: BoxFit.fill),
     ),
-    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 6),
+    padding: EdgeInsets.fromLTRB(2, 5, 8, 5),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        assetImage(isSpark ? DefaultImages.sparkIcon : DefaultImages.coinIcon, w: 22, h: 22),
-        Text(total, style: pNunitoExtraBold10.copyWith(fontSize: 10)),
+        isIcon ? assetImage(isSpark ? DefaultImages.sparkIcon : DefaultImages.coinIcon, w: icon ?? 20, h: icon ?? 20) : SizedBox(),
+        Text(total, style: pNunitoExtraBold10.copyWith(fontSize: font ?? 10)),
       ],
     ),
   );
@@ -109,7 +111,7 @@ Widget timeBox({String? time, String? title}) {
   );
 }
 
-startDuelBtn({required String title, bool isSingle = false, Function()? onTap, String? image,String? bgImage}) {
+startDuelBtn({required String title, bool isSingle = false, Function()? onTap, String? image, String? bgImage}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 8.0),
     child: Stack(

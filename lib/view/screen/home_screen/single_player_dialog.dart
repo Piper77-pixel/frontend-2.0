@@ -6,14 +6,15 @@ import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/login.dart';
+import 'package:brain_bucks/view/screen/games_screen/choose_topic_dialog.dart';
+import 'package:brain_bucks/view/screen/games_screen/games_screen.dart';
 import 'package:brain_bucks/view/widgets/common_button.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-showShinglePlayerDialog(BuildContext context) {
-  showMessage("🔆❔Single Player Dialog");
+showPlayerDialog(BuildContext context, Widget screen) {
   showDialog(
     context: context,
     // barrierColor: AppColors.kOpacityBackGround,
@@ -25,7 +26,7 @@ showShinglePlayerDialog(BuildContext context) {
           contentPadding: EdgeInsets.zero,
           insetPadding: EdgeInsets.all(AppDimen.padding),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimen.radius)),
-          content: SinglePlayerDialog(),
+          content: screen,
         ),
       );
     },
@@ -44,46 +45,73 @@ class SinglePlayerDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppDimen.smallRadius),
         image: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
       ),
-      padding: EdgeInsets.all(AppDimen.padding),
+      padding: EdgeInsets.symmetric(vertical: AppDimen.padding, horizontal: 8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           authTitleRow(AppString.kSinglePlayerGame.tr),
           verticalSpace(16),
-          sessionWidget(title: AppString.kSoloStreakSession.tr, image: DefaultImages.soloStreakImage, bg: DefaultImages.soloSessionBgImage, onPressed: () {}),
-          verticalSpace(16),
-          sessionWidget(title: AppString.kTopicMasterySession.tr, image: DefaultImages.topicMasteryImage, bg: DefaultImages.topicMasterySessionBgImage, onPressed: () {}),
-          verticalSpace(16),
-          sessionWidget(title: AppString.kTimeBlitzSession.tr, image: DefaultImages.timeBlitzImage, bg: DefaultImages.timeBlitzSessionBgImage, onPressed: () {}),
-          verticalSpace(16),
-        ],
-      ),
-    );
-  }
-
-  Widget sessionWidget({required String title, required String image, required String bg, required Function()? onPressed}) {
-    return Container(
-      width: Get.width,
-      padding: EdgeInsets.fromLTRB(30, 13, 34, 13),
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(bg), fit: BoxFit.fill),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          assetImage(image, h: 76),
-          // horizontalSpace(24),
-          Expanded(
-            child: Column(
-              children: [
-                FittedBox(child: Text(title, style: pNunitoExtraBold10.copyWith(fontSize: 18))),
-                verticalSpace(8),
-                CommonThemeButton(title: AppString.kPlayGame.tr, icon: DefaultImages.playIcon, onPressed: onPressed, fontSize: 13, height: 36, width: Get.width * 0.4),
-              ],
-            ),
+          sessionWidget(
+            title: AppString.kSoloStreakSession.tr,
+            image: DefaultImages.soloStreakImage,
+            bg: DefaultImages.soloSessionBgImage,
+            onPressed: () {
+              Get.back();
+              Get.to(() => GamesScreen(type: AppString.kSoloStreakSession,image: DefaultImages.soloStreakQuestionImage,));
+            },
           ),
+          verticalSpace(16),
+          sessionWidget(
+            title: AppString.kTopicMasterySession.tr,
+            image: DefaultImages.topicMasteryImage,
+            bg: DefaultImages.topicMasterySessionBgImage,
+            onPressed: () {
+              Get.back();
+              showPlayerDialog(context, ChooseTopicDialog());
+            },
+          ),
+          verticalSpace(16),
+          sessionWidget(
+            title: AppString.kTimeBlitzSession.tr,
+            image: DefaultImages.timeBlitzImage,
+            bg: DefaultImages.timeBlitzSessionBgImage,
+            onPressed: () {
+              Get.back();
+              Get.to(() => GamesScreen(type: AppString.kTimeBlitzSession));
+            },
+          ),
+          verticalSpace(16),
         ],
       ),
     );
   }
+}
+
+Widget sessionWidget({required String title, required String image, required String bg, required Function()? onPressed}) {
+  return Container(
+    height: Get.height * 0.11,
+    //height: 86,
+    width: Get.width,
+    padding: EdgeInsets.fromLTRB(35, 0, 35, 0),
+    decoration: BoxDecoration(
+      image: DecorationImage(image: AssetImage(bg), fit: BoxFit.fill),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        assetImage(image),
+        // horizontalSpace(24),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              FittedBox(child: Text(title, style: pNunitoExtraBold10.copyWith(fontSize: 18))),
+              CommonThemeButton(title: AppString.kPlayGame.tr, icon: DefaultImages.playIcon, onPressed: onPressed, fontSize: 13, height: 36, width: Get.width * 0.5),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }

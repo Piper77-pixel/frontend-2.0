@@ -49,5 +49,27 @@ class AppString {
   static String kTopicMasterySession = 'Topic Mastery Session';
   static String kTimeBlitzSession = 'Time Blitz Session';
   static String kPlayGame = 'PLAY GAME';
+  static String kQuestion = 'Question';
+  static String kAudience = 'Audience';
+  static String kPhone = 'Phone';
+  static String k5050 = '50/50';
+  static String kRewards = 'Rewards';
+  static String kCollect = 'COLLECT';
+  static String kCorrect = 'Correct';
+  static String kChooseATopic = 'Choose a Topic';
+  static String kCancel= 'Cancel';
+  static String kShareOn = 'Share on:';
+  static String kAmassyourfortuneunlockexclusiverewardsandletyourintellectpaydividends = 'Amass your fortune, unlock exclusive rewards, and let your intellect pay dividends.';
+  static String kDivedeepintodiversetopicsandexperiencethethrillofintellectualdiscovery = 'Dive deep into diverse topics, and experience the thrill of intellectual discovery.';
+  static String kVictoryisntanoptionOutsmartopponentsconquerchallengesandproveyourintellectualsupremacy = 'Victory isn\'t an option. Outsmart opponents, conquer challenges and prove your intellectual supremacy.';
+  static String kDuelPlayerGame = 'Duel player game';
+  static String kStandardSession = 'Standard Session';
+  static String kEliminationSession = 'Elimination Session';
+  static String kTimeAttackSession = 'Time Attack Session';
+  static String kTopicChallengeSession = 'Topic Challenge Session';
+  static String kStreakBreakerSession = 'Streak Breaker Session';
+  static String kSelectoneoftheoptions = 'Select one of the options.';
+  static String kRewardsCapital = 'REWARDS';
+  static String kPlayAgain = 'PLAY AGAIN';
   static String k = '';
 }

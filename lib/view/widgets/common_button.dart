@@ -16,6 +16,7 @@ class CommonThemeButton extends StatelessWidget {
   final double? width;
   final double? horizontal;
   final double? fontSize;
+  final double? icnSize;
   final Function()? onPressed;
   final Color? bColor;
   final Color? btnColor;
@@ -39,7 +40,7 @@ class CommonThemeButton extends StatelessWidget {
     this.fontWeight,
     this.isBlack = false,
     this.icon,
-    this.bgImage,
+    this.bgImage, this.icnSize,
   });
 
   @override
@@ -72,7 +73,7 @@ class CommonThemeButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (icon != null) SizedBox(width: 28, height: 28, child: assetImage(icon!)),
+              if (icon != null) SizedBox(width: icnSize??28, height: icnSize??28, child: assetImage(icon!)),
               if (icon != null) horizontalSpace(horizontal ?? 8),
               Text(
                 title!,
