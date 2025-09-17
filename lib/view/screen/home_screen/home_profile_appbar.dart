@@ -4,6 +4,7 @@ import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/prefer.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/show_auth_dialog.dart';
+import 'package:brain_bucks/view/screen/friends_screen/friends_list_screen.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class HomeProfileAppbar extends StatelessWidget {
   final String coin;
   final String profileName;
   final String profileImage;
+
   const HomeProfileAppbar({super.key, required this.coin, required this.profileName, required this.profileImage});
 
   @override
@@ -39,7 +41,12 @@ class HomeProfileAppbar extends StatelessWidget {
                       ? signupWidget(() {
                           showLoginSignupDialog(context);
                         })
-                      : GestureDetector(onTap: () {}, child: assetImage(DefaultImages.mainIcon, w: 28, h: 20)),
+                      : GestureDetector(
+                          onTap: () {
+                            Get.to(() => FriendsListScreen());
+                          },
+                          child: assetImage(DefaultImages.mailIcon, w: 28, h: 20),
+                        ),
                 ],
               ),
             ),
@@ -51,7 +58,7 @@ class HomeProfileAppbar extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                profileWidget(profileImage),
+                profileWidget(profileImage,Size(58, 58)),
                 verticalSpace(10),
                 Text(profileName, style: pRobotoMedium10.copyWith(fontSize: 11)),
               ],
@@ -63,10 +70,10 @@ class HomeProfileAppbar extends StatelessWidget {
   }
 }
 
-Container profileWidget(image) {
+Container profileWidget(image, Size? size) {
   return Container(
-    width: 58,
-    height: 58,
+    width: size!.width,
+    height: size.height,
     decoration: BoxDecoration(color: AppColors.kHex602F7B, shape: BoxShape.circle),
     padding: EdgeInsets.all(2),
     child: Container(
@@ -74,10 +81,7 @@ Container profileWidget(image) {
         color: AppColors.kThemeColor,
         shape: BoxShape.circle,
         border: Border.all(color: AppColors.kThemeColor, width: 2),
-        image: DecorationImage(
-          image: NetworkImage(image),
-          fit: BoxFit.cover,
-        ),
+        image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
       ),
     ),
   );

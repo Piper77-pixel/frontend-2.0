@@ -64,9 +64,16 @@ class DefaultImages {
   static String expBgImage = 'assets/images/exp_bg.png';
   static String emptyStarImage = 'assets/images/empty_star.png';
   static String redButtonBgImage = 'assets/images/red_button.png';
+  static String friendsAppbarImage = 'assets/images/friends_appbar.png';
+  static String loseCountBgImage = 'assets/images/lose_count_bg.png';
+  static String winCountBgImage = 'assets/images/win_count_bg.png';
+  static String winFlagImage = 'assets/images/win_flag.png';
+  static String loseFlagImage = 'assets/images/lose_flag.png';
   static String Image = '';
 
   static String Icon = '';
+  static String addCircleIcon = 'assets/icons/add_circle.png';
+  static String searchIcon = 'assets/icons/search.png';
   static String homeIcon = 'assets/icons/home.png';
   static String refreshCircleIcon = 'assets/icons/refresh_circle.png';
   static String tabHomeIcon = 'assets/icons/tab_home.png';
@@ -76,7 +83,7 @@ class DefaultImages {
   static String selectedTabIcon = 'assets/icons/selected_tab.png';
   static String coinIcon = 'assets/icons/ic_coin.png';
   static String sparkIcon = 'assets/icons/ic_spark.png';
-  static String mainIcon = 'assets/icons/ic_mail.png';
+  static String mailIcon = 'assets/icons/ic_mail.png';
   static String eyeIcon = 'assets/icons/ic_eye.png';
   static String offEyeIcon = 'assets/icons/ic_off_eye.png';
   static String closeIcon = 'assets/icons/ic_close.png';
@@ -89,6 +96,7 @@ class DefaultImages {
   static String lockIcon = 'assets/icons/lock.png';
   static String lock3DIcon = 'assets/icons/ic_3d_lock.png';
   static String backIcon = 'assets/icons/back.png';
+  static String settingIcon = 'assets/icons/ic_setting.png';
 
   ///dummy images
   static String profileImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW15BUXwvNHIpWR-nwmxAaGFIMCqM8AycwRolhIw8NsR0iU63l19H3EQxkudHEyrnZ4vY&usqp=CAU';
@@ -101,4 +109,7 @@ class DefaultImages {
   static String topicMathImage = 'assets/dummy_image/topic_math.png';
   static String topicScienceImage = 'assets/dummy_image/topic_science.png';
   static String topicSportsImage = 'assets/dummy_image/topic_sports.png';
+  static String notificationBlueImage = 'assets/dummy_image/notification_blue.png';
+  static String notificationPurpleImage = 'assets/dummy_image/notification_purple.png';
+  static String notificationYellowImage = 'assets/dummy_image/notification_yellow.png';
 }

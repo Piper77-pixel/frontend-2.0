@@ -105,6 +105,7 @@ class CommonButton extends StatelessWidget {
   final Color? textColor;
   final double? radius;
   final FontWeight? fontWeight;
+  final TextStyle? style;
 
   const CommonButton({
     super.key,
@@ -119,7 +120,7 @@ class CommonButton extends StatelessWidget {
     this.horizontal,
     this.radius,
     this.fontWeight,
-    this.icon,
+    this.icon, this.style,
   });
 
   @override
@@ -145,7 +146,7 @@ class CommonButton extends StatelessWidget {
               if (icon != null) horizontalSpace(8),
               Text(
                 title!,
-                style: pRobotoBold10.copyWith(
+                style: style??pRobotoBold10.copyWith(
                   color: textColor ?? AppColors.kFont,
                   fontSize: fontSize ?? 16, //14
                   fontWeight: fontWeight,

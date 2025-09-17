@@ -71,5 +71,18 @@ class AppString {
   static String kSelectoneoftheoptions = 'Select one of the options.';
   static String kRewardsCapital = 'REWARDS';
   static String kPlayAgain = 'PLAY AGAIN';
+  static String kFriendsRequests = 'Friends requests';
+  static String kRequests = 'Requests';
+  static String kFriendsList = 'Friends list';
+  static String kNotifications = 'Notifications';
+  static String kSearch = 'Search...';
+  static String kDecline = 'DECLINE';
+  static String kAccept = 'ACCEPT';
+  static String kAgo = 'ago';
+  static String kMutualFriends = 'mutual friends';
+  static String kREQUEST = 'REQUEST';
+  static String kRequested = 'Requested';
+  static String kWin = 'Win';
+  static String kLose = 'Lose';
   static String k = '';
 }

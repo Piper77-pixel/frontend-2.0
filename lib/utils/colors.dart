@@ -18,6 +18,21 @@ class AppColors {
   static Color kHexAB1DFF = Color(0xffAB1DFF);
   static Color kHex7C10F9 = Color(0xff7C10F9);
   static Color kHex0A020E = Color(0xff0A020E);
+  static Color kHex900FE6 = Color(0xff900FE6);
+  static Color kHex6E05AB = Color(0xff6E05AB);
+  static Color kHex60148C = Color(0xff60148C);
+  static Color kHexC674F7 = Color(0xffC674F7);
+  static Color kHex7127CF = Color(0xff7127CF).withOpacity(1.0);
+  static Color kHex740E0E = Color(0xff740E0E);
+  static Color kHex632BA4 = Color(0xff632BA4);
+  static Color kHex2A192F = Color(0xff2A192F);
+  static Color kHex111011 = Color(0xff111011);
+  static Color kHex2CBD6D = Color(0xff2CBD6D);
+  static Color kHexEB4435 = Color(0xffEB4435);
+  static Color kHex0FE673 = Color(0xff0FE673);
+  static Color kHex05AB4A = Color(0xff05AB4A);
+  static Color kHexE60F2F = Color(0xffE60F2F);
+  static Color kHexAB0529 = Color(0xffAB0529);
   static Color kHex = Color(0xff);
 
   static Color kAnswerBg = Color(0xff282828);

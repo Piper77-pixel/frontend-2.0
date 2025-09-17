@@ -6,17 +6,13 @@ class ImageFillProgressBar extends StatelessWidget {
   final double value;
   final double height;
   final BorderRadius radius;
+  final BorderRadius? imageRadius;
+  final Color? color;
 
   /// Use AssetImage / NetworkImage / FileImage etc.
   final ImageProvider fillImage;
 
-  const ImageFillProgressBar({
-    super.key,
-    required this.value,
-    required this.fillImage,
-    this.height = 20,
-    this.radius = const BorderRadius.all(Radius.circular(12)),
-  });
+  const ImageFillProgressBar({super.key, required this.value, required this.fillImage, this.height = 20, this.radius = const BorderRadius.all(Radius.circular(12)), this.color, this.imageRadius});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +26,7 @@ class ImageFillProgressBar extends StatelessWidget {
         child: Stack(
           children: [
             // Track (unfilled part)
-            Positioned.fill(child: Container(color: AppColors.kLightBg)),
+            Positioned.fill(child: Container(color: color ?? AppColors.kLightBg)),
 
             // Filled part (image)
             Align(
@@ -38,9 +34,12 @@ class ImageFillProgressBar extends StatelessWidget {
               child: FractionallySizedBox(
                 widthFactor: v,
                 child: SizedBox.expand(
-                  child: Image(
-                    image: fillImage,
-                    fit: BoxFit.cover,     // image covers the bar height/width
+                  child: ClipRRect(
+                    borderRadius: imageRadius ?? BorderRadius.zero,
+                    child: Image(
+                      image: fillImage,
+                      fit: BoxFit.cover, // image covers the bar height/width
+                    ),
                   ),
                 ),
               ),

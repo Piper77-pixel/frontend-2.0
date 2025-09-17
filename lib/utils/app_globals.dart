@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:brain_bucks/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'images.dart';
 
@@ -198,7 +200,15 @@ final Map<String, List<Map<String, dynamic>>> questionBank = {
     },
   ],
 };
-
+SystemUiOverlayStyle buildSystemUiOverlayStyle() {
+  return SystemUiOverlayStyle(
+    statusBarColor: AppColors.kTransparent,
+    systemNavigationBarColor: AppColors.kBlack,
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarIconBrightness: Brightness.light,
+    statusBarBrightness: Brightness.dark,
+  );
+}
 void navigatePushAndRemoveUntil(BuildContext context, Widget screen) async {
   Navigator.pushAndRemoveUntil(
     context,
