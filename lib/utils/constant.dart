@@ -84,5 +84,17 @@ class AppString {
   static String kRequested = 'Requested';
   static String kWin = 'Win';
   static String kLose = 'Lose';
-  static String k = '';
+  static String kYou = 'You';
+  static String kDuel = 'Duel';
+  static String kEarned = 'Earned';
+  static String kStreak = 'Streak';
+  static String kAccuracy = 'Accuracy';
+  static String kShareon = 'Share on:';
+  static String kLifeline = 'Lifeline';
+  static String kAnswer = 'Answer';
+  static String kYourScore = 'Your score:';
+  static String kHighest= 'Highest:';
+  static String kSessionCompleted= 'Session\nCompleted';
+  static String kClaimReward= 'CLAIM REWARD';
+  static String k= '';
 }

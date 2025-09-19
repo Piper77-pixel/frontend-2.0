@@ -58,7 +58,7 @@ class HomeProfileAppbar extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                profileWidget(profileImage,Size(58, 58)),
+                profileWidget(profileImage, Size(58, 58)),
                 verticalSpace(10),
                 Text(profileName, style: pRobotoMedium10.copyWith(fontSize: 11)),
               ],
@@ -70,17 +70,17 @@ class HomeProfileAppbar extends StatelessWidget {
   }
 }
 
-Container profileWidget(image, Size? size) {
+Container profileWidget(image, Size? size, {Color? color, double? padding}) {
   return Container(
     width: size!.width,
     height: size.height,
-    decoration: BoxDecoration(color: AppColors.kHex602F7B, shape: BoxShape.circle),
-    padding: EdgeInsets.all(2),
+    decoration: BoxDecoration(color: color ?? AppColors.kHex602F7B, shape: BoxShape.circle),
+    padding: EdgeInsets.all(padding ?? 2),
     child: Container(
       decoration: BoxDecoration(
-        color: AppColors.kThemeColor,
+        color: color ?? AppColors.kThemeColor,
         shape: BoxShape.circle,
-        border: Border.all(color: AppColors.kThemeColor, width: 2),
+        border: Border.all(color: color ?? AppColors.kThemeColor, width: 2),
         image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
       ),
     ),

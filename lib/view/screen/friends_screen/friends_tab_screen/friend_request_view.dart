@@ -42,54 +42,56 @@ class _FriendRequestViewState extends State<FriendRequestView> {
             verticalSpace(16),
 
             // Results with blur background
-            Stack(
-              children: [
-                // Background (content behind)
-                ImageFiltered(
-                  imageFilter: !friendsListController.isSearch.value ? ImageFilter.blur(sigmaY: 0, sigmaX: 0) : ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                  child: ListView.builder(
-                    itemCount: friendsListController.friendRequestsList.length,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    // physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, index) {
-                      var dict = friendsListController.friendRequestsList[index];
-                      return friendRequestsWidget(
-                        profile: dict['profile'],
-                        title: dict['title'],
-                        mutualFri: dict['mutualFri'],
-                        time: dict['time'],
-                        friendList: dict['friendList'],
-                        actionProfile: () {
-                          Get.to(() => FriendsProfileScreen());
-                        },
-                        actionAccept: () {},
-                        actionDecline: () {},
-                      );
-                    },
+            Expanded(
+              child: Stack(
+                children: [
+                  // Background (content behind)
+                  ImageFiltered(
+                    imageFilter: !friendsListController.isSearch.value ? ImageFilter.blur(sigmaY: 0, sigmaX: 0) : ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                    child: ListView.builder(
+                      itemCount: friendsListController.friendRequestsList.length,
+                      shrinkWrap: true,
+                      // physics: NeverScrollableScrollPhysics(),
+                      // physics: BouncingScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (context, index) {
+                        var dict = friendsListController.friendRequestsList[index];
+                        return friendRequestsWidget(
+                          profile: dict['profile'],
+                          title: dict['title'],
+                          mutualFri: dict['mutualFri'],
+                          time: dict['time'],
+                          friendList: dict['friendList'],
+                          actionProfile: () {
+                            Get.to(() => FriendsProfileScreen());
+                          },
+                          actionAccept: () {},
+                          actionDecline: () {},
+                        );
+                      },
+                    ),
                   ),
-                ),
-                // Blurred container (only this part is blurred)
-                friendsListController.isSearch.value
-                    ? Container(
-                        decoration: BoxDecoration(color: AppColors.kBackGround, borderRadius: BorderRadius.circular(16)),
-                        padding: const EdgeInsets.all(8),
-                        child: friendsListController.filteredUsers.isEmpty
-                            ? SizedBox()
-                            : ListView.builder(
-                                itemCount: friendsListController.filteredUsers.length,
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.zero,
-                                itemBuilder: (context, index) {
-                                  var dict = friendsListController.filteredUsers[index];
-                                  return userWidget(profile: dict['image'], name: dict['name'], bgColor: index == 0 ? AppColors.kWhite.withOpacity(0.12) : AppColors.kBackGround);
-                                },
-                              ),
-                      )
-                    : SizedBox(),
-              ],
+                  // Blurred container (only this part is blurred)
+                  friendsListController.isSearch.value
+                      ? Container(
+                          decoration: BoxDecoration(color: AppColors.kBackGround, borderRadius: BorderRadius.circular(16)),
+                          padding: const EdgeInsets.all(8),
+                          child: friendsListController.filteredUsers.isEmpty
+                              ? SizedBox()
+                              : ListView.builder(
+                                  itemCount: friendsListController.filteredUsers.length,
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.zero,
+                                  itemBuilder: (context, index) {
+                                    var dict = friendsListController.filteredUsers[index];
+                                    return userWidget(profile: dict['image'], name: dict['name'], bgColor: index == 0 ? AppColors.kWhite.withOpacity(0.12) : AppColors.kBackGround);
+                                  },
+                                ),
+                        )
+                      : SizedBox(),
+                ],
+              ),
             ),
           ],
         ),

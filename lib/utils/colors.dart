@@ -33,6 +33,9 @@ class AppColors {
   static Color kHex05AB4A = Color(0xff05AB4A);
   static Color kHexE60F2F = Color(0xffE60F2F);
   static Color kHexAB0529 = Color(0xffAB0529);
+  static Color kHex2A5510 = Color(0xff2A5510);
+  static Color kHex0F0214 = Color(0xff0F0214);
+  static Color kHex2E2E2E = Color(0xff2E2E2E);
   static Color kHex = Color(0xff);
 
   static Color kAnswerBg = Color(0xff282828);

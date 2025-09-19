@@ -17,7 +17,7 @@ class NotificationView extends StatelessWidget {
     return ListView.builder(
       itemCount: friendsListController.notificationsList.length,
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       padding: EdgeInsets.zero,
       itemBuilder: (context, index) {
         var dict = friendsListController.notificationsList[index];

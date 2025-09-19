@@ -18,7 +18,9 @@ import 'custom_tab_bar.dart';
 import 'friends_tab_screen/friend_request_view.dart';
 
 class FriendsListScreen extends StatefulWidget {
-  const FriendsListScreen({super.key});
+  final bool isDuel;
+
+  const FriendsListScreen({super.key, this.isDuel = false});
 
   @override
   State<FriendsListScreen> createState() => _FriendsListScreenState();
@@ -32,6 +34,9 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
     // TODO: implement initState
     super.initState();
     friendsListController.isSearch.value = false;
+    if (widget.isDuel == true) {
+      friendsListController.selectedSegment_04.value = 'friend_list';
+    }
   }
 
   @override
@@ -48,41 +53,38 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
             return Column(
               children: [
                 backAppBar(buildLabel(friendsListController.selectedSegment_04.value)),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppColors.kBlack,
-                      borderRadius: BorderRadius.circular(AppDimen.radius),
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(colors: AppColors.linerSelectedTextFieldBorderColor, begin: Alignment.topCenter, end: Alignment.bottomCenter),
-                        width: 1,
-                      ),
-                    ),
-                    child: CustomTabBar(
-                      controller: friendsListController.selectedSegment_04,
-                      segments: friendsListController.segment.value,
-                      backgroundColor: AppColors.kBlack,
-                      itemPadding: EdgeInsetsGeometry.symmetric(vertical: 8, horizontal: 24),
-                      sliderDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppDimen.radius),
-                        gradient: LinearGradient(colors: [AppColors.kHex900FE6, AppColors.kHex6E05AB], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-                      ),
-                      activeStyle: pRobotoMedium10.copyWith(fontSize: 14),
-                      inactiveStyle: pRobotoMedium10.copyWith(fontSize: 14),
-                    ),
-                  ),
-                ),
-
                 Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.fromLTRB(16, 16, 16, 20),
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    children: [
-                     buildScreen(friendsListController.selectedSegment_04.value)
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppColors.kBlack,
+                            borderRadius: BorderRadius.circular(AppDimen.radius),
+                            border: GradientBoxBorder(
+                              gradient: LinearGradient(colors: AppColors.linerSelectedTextFieldBorderColor, begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                              width: 1,
+                            ),
+                          ),
+                          child: CustomTabBar(
+                            controller: friendsListController.selectedSegment_04,
+                            segments: friendsListController.segment.value,
+                            backgroundColor: AppColors.kBlack,
+                            itemPadding: EdgeInsetsGeometry.symmetric(vertical: 8, horizontal: 24),
+                            sliderDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(AppDimen.radius),
+                              gradient: LinearGradient(colors: [AppColors.kHex900FE6, AppColors.kHex6E05AB], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                            ),
+                            activeStyle: pRobotoMedium10.copyWith(fontSize: 14),
+                            inactiveStyle: pRobotoMedium10.copyWith(fontSize: 14),
+                          ),
+                        ),
+                        verticalSpace(16),
+                        Expanded(child: buildScreen(friendsListController.selectedSegment_04.value)),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -98,7 +100,7 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
       case 'request':
         return FriendRequestView();
       case 'friend_list':
-        return FriendsListView();
+        return FriendsListView(isDuel: widget.isDuel,);
       case 'notification':
         return NotificationView();
     }

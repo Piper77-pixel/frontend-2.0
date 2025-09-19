@@ -5,6 +5,7 @@ import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/games_screen/game_screen_widget.dart';
+import 'package:brain_bucks/view/screen/home_screen/home_profile_appbar.dart';
 import 'package:brain_bucks/view/widgets/bg_image_widget.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
@@ -46,7 +47,7 @@ class _GamesScreenState extends State<GamesScreen> {
     quizController.winCount.value = 0;
     quizController.loseCount.value = 0;
     quizController.selectedAnswerIndex.value = -1;
-    quizController.startTimer(context, widget.type);
+    // quizController.startTimer(context, widget.type);
   }
 
   @override
@@ -61,13 +62,16 @@ class _GamesScreenState extends State<GamesScreen> {
     return BgImageWidget(
       bgImage: DefaultImages.gameScreenBgImage,
       child: Obx(() {
+        print(quizController.showWin.value);
         return Column(
           children: [
             GameProfileAppbar(timer: QuizController.startSeconds, coin: "1138", spark: '2238'),
             Expanded(
               child: Stack(
                 children: [
-                  quizController.showWin.value == true
+                  widget.type == AppString.kDuel
+                      ? SizedBox()
+                      : quizController.showWin.value == true
                       ? Align(
                           alignment: AlignmentGeometry.topCenter,
                           child: assetImage(DefaultImages.winConfettiImage, w: Get.width, fit: BoxFit.cover, h: 400),
@@ -84,13 +88,41 @@ class _GamesScreenState extends State<GamesScreen> {
                         var que = quizController.questionList[quizController.question.value];
 
                         final correctAnswer = que['correct'];
-                        final suggestion = que['suggestion'];
-                        List optionIndices = quizController.isViewFifty.value == false ? quizController.visibleOptions : List.generate(que['option'].length, (index) => index);
+                        final fifty = List<String>.from(que['fifty']);
+                        final options = List<String>.from(que['option']);
+                        // If 50/50 used → only two visible, others disabled
+                        List<String> optionIndices = quizController.isViewFifty.value ? options : options.where((opt) => fifty.contains(opt)).toList();
+                        showMessage("optionIndices----$optionIndices");
                         return Padding(
                           padding: EdgeInsets.symmetric(horizontal: AppDimen.padding),
                           child: Column(
                             children: [
-                              widget.type == AppString.kSoloStreakSession
+                              widget.type == AppString.kDuel
+                                  ? Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            quizController.handleAbandonedDialog(context); //temporary open here
+                                          },
+                                          child: playerPointWidget(
+                                            bgImage: DefaultImages.duelFriendPointBgImage,
+                                            name: 'parisOG',
+                                            profileImage: DefaultImages.profileImage,
+                                            level: '32',
+                                            pointList: quizController.playerList,
+                                          ),
+                                        ),
+                                        verticalSpace(Get.height * 0.022), //20
+                                        playerPointWidget(
+                                          bgImage: DefaultImages.duelYouPointBgImage,
+                                          name: AppString.kYou.tr,
+                                          profileImage: DefaultImages.profileImage,
+                                          level: '32',
+                                          pointList: quizController.player2List,
+                                        ),
+                                      ],
+                                    )
+                                  : widget.type == AppString.kSoloStreakSession
                                   ? Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
@@ -117,7 +149,7 @@ class _GamesScreenState extends State<GamesScreen> {
                                     Container(
                                       // height: Get.height * 0.45,
                                       width: Get.width,
-                                      margin: EdgeInsets.only(top: Get.height * 0.08),
+                                      margin: EdgeInsets.only(top: widget.type == AppString.kDuel ? 0 : Get.height * 0.08),
                                       //70
                                       decoration: BoxDecoration(
                                         // color: Colors.red,
@@ -125,7 +157,7 @@ class _GamesScreenState extends State<GamesScreen> {
                                         borderRadius: BorderRadius.circular(AppDimen.smallRadius),
                                       ),
                                       // padding: EdgeInsets.fromLTRB(13, 0, 13, 0),
-                                      padding: EdgeInsets.fromLTRB(13, Get.height * 0.08, 13, 0),
+                                      padding: widget.type == AppString.kDuel ? EdgeInsets.all(13) : EdgeInsets.fromLTRB(13, Get.height * 0.08, 13, 0),
                                       child: Column(
                                         // mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,85 +182,77 @@ class _GamesScreenState extends State<GamesScreen> {
                                             showMessage("-=-=${quizController.showResult.value}-=-");
 
                                             return ListView.builder(
-                                              itemCount: optionIndices.length,
-                                              //que['option'].length,
+                                              itemCount: options.length,
                                               shrinkWrap: true,
                                               physics: NeverScrollableScrollPhysics(),
                                               padding: EdgeInsets.zero,
                                               itemBuilder: (context, index) {
-                                                int displayIndex = optionIndices[index];
-                                                final option = que['option'][displayIndex];
+                                                final option = options[index];
                                                 bool isSelected = quizController.selectedAnswerIndex.value == index;
                                                 bool isCorrect = option == correctAnswer;
                                                 bool isIndicator = false;
+                                                // If 50/50 used, only allow taps on two visible options
+                                                bool isEnabled = quizController.isViewFifty.value || fifty.contains(option);
+                                                // Audience percentage
+                                                final audiencePercent = que['audience'][index];
+
                                                 bool isShowCall = false;
                                                 // showMessage(option);
                                                 // showMessage(correctAnswer);
                                                 Color bgColor = AppColors.kTransparent;
-                                                // Color indicatorColor = AppColors.kThemeColor;
-                                                // String? trailingIcon;
-                                                // String? suggestionString;
+
                                                 // showMessage("isSelected---$isSelected - isCorrect---$isCorrect");
                                                 if (quizController.showResult.value) {
                                                   if (isSelected && isCorrect) {
                                                     bgColor = AppColors.kGreen;
                                                     isIndicator = true;
-                                                    // suggestionString = suggestion;
-                                                    // indicatorColor = AppColors.kThemeColor;
-                                                    // trailingIcon = DefaultImages.checkIcn;
                                                   } else if (isSelected && !isCorrect) {
                                                     bgColor = AppColors.kRed;
                                                     isIndicator = true;
-                                                    // indicatorColor = AppColors.kRed;
-                                                    // trailingIcon = DefaultImages.cancelIcn;
                                                   } else if (!isSelected && isCorrect) {
                                                     bgColor = AppColors.kGreen;
                                                     isIndicator = true;
-                                                    // indicatorColor = AppColors.kThemeColor;
-                                                    // trailingIcon = DefaultImages.checkIcn;
-                                                    // suggestionString = suggestion;
                                                   }
                                                 } else {
                                                   isShowCall = isCorrect && quizController.isCallFriend.value == false;
                                                 }
                                                 return Container(
                                                   // color: bgColor,
-                                                  child: answerWidget(
-                                                    number: '${index + 1}',
-                                                    name: '$option',
-                                                    isSelected: isIndicator,
-                                                    indicatorColor: bgColor,
-                                                    widget: Row(
-                                                      children: [
-                                                        // trailingIcon != null ? buildImageWidget(trailingIcon!) : SizedBox(),
-                                                        // isShowCall ? showCallWidget(context, profileImage: DefaultImages.friend1, suggestion: 'Last time i checked, this should be the answer') : SizedBox(),
-                                                        // quizController.showResult.value == false && quizController.isViewAudience.value == false
-                                                        //     ? showAudienceRateWidget('${que['audience'][index]}%')
-                                                        //     : SizedBox(),
-                                                      ],
+                                                  child: IgnorePointer(
+                                                    ignoring: !isEnabled, // disable taps
+                                                    child: Opacity(
+                                                      opacity: isEnabled ? 1.0 : 0.4, // dim disabled ones
+                                                      child: answerWidget(
+                                                        number: '${index + 1}',
+                                                        name: option,
+                                                        isSelected: isIndicator,
+                                                        indicatorColor: bgColor,
+                                                        audiencePercent: audiencePercent,
+                                                        isAudience: !quizController.isViewAudience.value,
+                                                        onTap: () {
+                                                          // bgColor = AppColors.kAnswerBg; // when tap answer show color
+                                                          // WidgetsBinding.instance.addPostFrameCallback((_) {
+                                                          if (!quizController.showResult.value) {
+                                                            quizController.selectedAnswerIndex.value = index;
+                                                            quizController.showResult.value = true;
+                                                            quizController.selectedAnswerIndex.refresh();
+                                                            quizController.showResult.refresh();
+                                                            showMessage("$correctAnswer---$index ---${quizController.selectedAnswerIndex.value}");
+                                                            quizController.nextQuestion(context, widget.type, second: 2);
+                                                            // bool selected = quizController.selectedAnswerIndex.value == index;
+                                                            if (quizController.selectedAnswerIndex.value == index && isCorrect) {
+                                                              quizController.showWin.value = true;
+                                                              showMessage("showWin---${quizController.showWin.value}");
+                                                              quizController.onWinLoseCount(true);
+                                                              // trailingIcon = DefaultImages.checkIcn;
+                                                            } else if (quizController.selectedAnswerIndex.value == index && !isCorrect) {
+                                                              quizController.onWinLoseCount(false);
+                                                            }
+                                                          }
+                                                          // });
+                                                        },
+                                                      ),
                                                     ),
-                                                    onTap: () {
-                                                      // bgColor = AppColors.kAnswerBg; // when tap answer show color
-                                                      // WidgetsBinding.instance.addPostFrameCallback((_) {
-                                                      if (!quizController.showResult.value) {
-                                                        quizController.selectedAnswerIndex.value = index;
-                                                        quizController.showResult.value = true;
-                                                        quizController.selectedAnswerIndex.refresh();
-                                                        quizController.showResult.refresh();
-                                                        showMessage("$correctAnswer---$index ---${quizController.selectedAnswerIndex.value}");
-                                                        quizController.nextQuestion(context, widget.type, second: 2);
-                                                        // bool selected = quizController.selectedAnswerIndex.value == index;
-                                                        if (quizController.selectedAnswerIndex.value == index && isCorrect) {
-                                                          quizController.showWin.value = true;
-                                                          showMessage("showWin---${quizController.showWin.value}");
-                                                          quizController.onWinLoseCount(true);
-                                                          // trailingIcon = DefaultImages.checkIcn;
-                                                        } else if (quizController.selectedAnswerIndex.value == index && !isCorrect) {
-                                                          quizController.onWinLoseCount(false);
-                                                        }
-                                                      }
-                                                      // });
-                                                    },
                                                   ),
                                                 );
                                               },
@@ -237,13 +261,15 @@ class _GamesScreenState extends State<GamesScreen> {
                                         ],
                                       ),
                                     ),
-                                    Align(
-                                      alignment: Alignment.topCenter /*- Alignment(0, 0.6)*/,
-                                      child: assetImage(
-                                        widget.image ?? DefaultImages.questionImage,
-                                        h: Get.height * 0.160, //135
-                                      ),
-                                    ),
+                                    widget.type == AppString.kDuel
+                                        ? SizedBox()
+                                        : Align(
+                                            alignment: Alignment.topCenter /*- Alignment(0, 0.6)*/,
+                                            child: assetImage(
+                                              widget.image ?? DefaultImages.questionImage,
+                                              h: Get.height * 0.160, //135
+                                            ),
+                                          ),
                                   ],
                                 ),
                               ),
@@ -322,6 +348,56 @@ class _GamesScreenState extends State<GamesScreen> {
     );
   }
 
+  Widget playerPointWidget({String? bgImage, String? profileImage, String? name, String? level, List? pointList}) {
+    return Container(
+      // height: Get.height * 0.093,
+      width: Get.width,
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(bgImage ?? DefaultImages.duelFriendPointBgImage), fit: BoxFit.fill),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      padding: EdgeInsets.all(AppDimen.padding),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              profileWidget(profileImage, Size(Get.width * 0.106, Get.height * 0.049), padding: 0),
+              horizontalSpace(8),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name!, style: pRobotoMedium10.copyWith(fontSize: 14)),
+                  Text('${AppString.kLevel.tr} $level', style: pRobotoMedium10.copyWith(fontSize: 10, color: AppColors.kWhite.withOpacity(0.4))),
+                ],
+              ),
+            ],
+          ), //95
+
+          Row(
+            children: pointList!
+                .map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.only(left: 4),
+                    child: assetImage(
+                      e == 1
+                          ? DefaultImages.tickCircleIcon
+                          : e == 0
+                          ? DefaultImages.closeCircleIcon
+                          : DefaultImages.circleIcon,
+                      h: 20,
+                      w: 20,
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget showCallWidget(BuildContext context, {String? suggestion, String? profileImage}) {
     return GestureDetector(
       onTapDown: (details) {
@@ -361,7 +437,6 @@ class _GamesScreenState extends State<GamesScreen> {
             width: 84,
             // height: 64,
             decoration: BoxDecoration(
-              // color: AppColors.kWhite.withOpacity(0.5),
               image: DecorationImage(
                 // image: AssetImage(isAvailable == true ? DefaultImages.shadowCircleImage : DefaultImages.circleBgImage),
                 image: AssetImage(DefaultImages.lifeLineBgImage),
@@ -371,10 +446,7 @@ class _GamesScreenState extends State<GamesScreen> {
             padding: EdgeInsets.fromLTRB(14, 8, 13, 8),
             child: Column(
               children: [
-                Center(
-                  child: assetImage(image!, h: 27, w: 27),
-                  // child: assetImage(image!, h: double.tryParse(imageH.toString()), w: double.tryParse(imageW.toString())),
-                ),
+                Center(child: assetImage(image!, h: 27, w: 27)),
                 verticalSpace(3),
                 Text(title!, style: pRobotoRegular10.copyWith(fontSize: 12)),
               ],
@@ -389,48 +461,71 @@ class _GamesScreenState extends State<GamesScreen> {
     );
   }
 
-  Widget answerWidget({Function()? onTap, bool? isSelected, Color? indicatorColor, String? name, String? number, Widget? widget}) {
+  Widget answerWidget({Function()? onTap, bool? isSelected, bool? isAudience, Color? indicatorColor, String? name, String? number, Widget? widget, String? audiencePercent}) {
     return Padding(
       padding: EdgeInsets.only(bottom: Get.height * 0.014), //12
       child: GestureDetector(
         onTap: onTap,
-        child: Container(
-          height: Get.height * 0.05375,
-          width: Get.width,
-          decoration: BoxDecoration(
-            color: indicatorColor,
-            // color: isSelected == true ? AppColors.kAnswerBg : AppColors.kTransparent,
-            borderRadius: BorderRadius.circular(Get.width * 0.03), //15
-            border: Border.all(color: AppColors.kGreyBorder),
-          ),
-          // padding: EdgeInsets.only(right: 14),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
+        child: Stack(
+          children: [
+            if (isAudience == true)
+              Positioned.fill(
+                child: FractionallySizedBox(
+                  alignment: Alignment.centerLeft,
+                  widthFactor: double.tryParse(audiencePercent.toString())! / 100,
+                  child: Container(
+                    decoration: BoxDecoration(color: AppColors.kHexAB1DFF.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 17),
+                      child: Align(
+                        alignment: AlignmentGeometry.centerLeft,
+                        child: FittedBox(
+                          child: Text('${audiencePercent!}%', style: pRobotoRegular10.copyWith(fontSize: 16), textAlign: TextAlign.center),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            Container(
+              height: Get.height * 0.05375,
+              width: Get.width,
+              decoration: BoxDecoration(
+                color: indicatorColor,
+                // color: isSelected == true ? AppColors.kAnswerBg : AppColors.kTransparent,
+                borderRadius: BorderRadius.circular(Get.width * 0.03), //15
+                border: Border.all(color: AppColors.kGreyBorder),
+              ),
+              // padding: EdgeInsets.only(right: 14),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // isSelected == true
-                  // // ? glowingIndicator(indicatorColor!)
-                  //     ? Container(
-                  //   height: 35,
-                  //   width: 5,
-                  //   decoration: LeftGlowIndicator(
-                  //     height: 35,
-                  //     width: 4,
-                  //     color: indicatorColor,
-                  //     // color: isCorrect == true ? AppColors.kThemeColor : AppColors.kRed,
-                  //   ),
-                  // )
-                  //     : SizedBox(),
-                  // horizontalSpace(isSelected == true ? 9 : 14),
-                  // Text(number!, style: pRobotoMedium10.copyWith(color: AppColors.kGreyFont, fontSize: 16)),
-                  // horizontalSpace(18),
-                  Text(name!, style: isSelected == true ? pRobotoBold10.copyWith(fontSize: 16) : pRobotoRegular10.copyWith(fontSize: 16)),
+                  Row(
+                    children: [
+                      // isSelected == true
+                      // // ? glowingIndicator(indicatorColor!)
+                      //     ? Container(
+                      //   height: 35,
+                      //   width: 5,
+                      //   decoration: LeftGlowIndicator(
+                      //     height: 35,
+                      //     width: 4,
+                      //     color: indicatorColor,
+                      //     // color: isCorrect == true ? AppColors.kThemeColor : AppColors.kRed,
+                      //   ),
+                      // )
+                      //     : SizedBox(),
+                      // horizontalSpace(isSelected == true ? 9 : 14),
+                      // Text(number!, style: pRobotoMedium10.copyWith(color: AppColors.kGreyFont, fontSize: 16)),
+                      // horizontalSpace(18),
+                      Text(name!, style: isSelected == true ? pRobotoBold10.copyWith(fontSize: 16) : pRobotoRegular10.copyWith(fontSize: 16)),
+                    ],
+                  ),
+                  widget!,
                 ],
               ),
-              widget!,
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

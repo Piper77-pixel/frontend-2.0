@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
+import 'package:brain_bucks/view/screen/games_screen/duel_game/abandoned_dialog.dart';
+import 'package:brain_bucks/view/screen/games_screen/duel_game/duel_time_out_dialog.dart';
+import 'package:brain_bucks/view/screen/games_screen/duel_game/duel_you_win_dialog.dart';
 import 'package:brain_bucks/view/screen/games_screen/games_screen.dart';
 import 'package:brain_bucks/view/screen/games_screen/you_lose_dialog.dart';
 import 'package:brain_bucks/view/screen/games_screen/you_win_dialog.dart';
@@ -17,6 +21,7 @@ class QuizController extends GetxController {
   RxInt loseCount = 0.obs;
   RxInt selectedAnswerIndex = 0.obs;
   RxBool showResult = false.obs;
+  RxBool isShowDuelVs = false.obs;
   RxBool showWin = false.obs;
   RxBool isAudience = true.obs;
   RxBool isCall = true.obs;
@@ -24,6 +29,8 @@ class QuizController extends GetxController {
   RxBool isViewAudience = true.obs;
   RxBool isViewFifty = true.obs;
   RxBool isFifty = true.obs;
+  RxList playerList = [1, 0, 1, -1, -1, -1, -1, -1].obs;
+  RxList player2List = [0, 1, -1, -1, -1, -1, -1, -1].obs;
 
   void nextQuestion(BuildContext context, String type, {int? second}) {
     Future.delayed(Duration(seconds: second ?? 2), () {
@@ -74,23 +81,50 @@ class QuizController extends GetxController {
       nextQuestion(context, type);
     }
   }
+
   RxList questionList = [].obs;
 
-
   RxList visibleOptions = [].obs;
+  RxList disableOptions = [].obs;
 
   void useFiftyFiftyLifeline(List<String> options, String correctAnswer) {
+    // Keep correct answer always
     int correctIndex = options.indexOf(correctAnswer);
-    List incorrectIndices = List.generate(options.length, (i) => i).where((i) {
+
+    // Pick one random wrong answer
+    List<int> wrongIndexes = List.generate(options.length, (i) => i).where((i) {
       showMessage('i---$i--correct-$correctIndex');
 
       return i != correctIndex;
     }).toList();
+    // options.asMap().entries.where((e) => !e.value.isCorrect).map((e) => e.key).toList();
+    wrongIndexes.shuffle();
+    int wrongIndex = wrongIndexes.first;
 
-    incorrectIndices.shuffle();
-    visibleOptions.value = [correctIndex, incorrectIndices.first];
-    visibleOptions.sort();
+    // Update visibility: keep only correct + one wrong
+    for (int i = 0; i < options.length; i++) {
+      if (i == correctIndex || i == wrongIndex) {
+        // options[i].isVisible = true;
+        visibleOptions.value.add(i);
+      } else {
+        // options[i].isVisible = false;
+        disableOptions.value.add(i);
+      }
+    }
   }
+
+  // void useFiftyFiftyLifeline(List<String> options, String correctAnswer) {
+  //   int correctIndex = options.indexOf(correctAnswer);
+  //   List incorrectIndices = List.generate(options.length, (i) => i).where((i) {
+  //     showMessage('i---$i--correct-$correctIndex');
+  //
+  //     return i != correctIndex;
+  //   }).toList();
+  //
+  //   incorrectIndices.shuffle();
+  //   visibleOptions.value = [correctIndex, incorrectIndices.first];
+  //   visibleOptions.sort();
+  // }
 
   void startTimer(BuildContext context, String type) {
     timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
@@ -99,9 +133,12 @@ class QuizController extends GetxController {
         if (type == AppString.kTimeBlitzSession) {
           hangleWinLose(context, type);
         } else {
-          nextQuestion(context, type, second: 0);
-          startTimer(context, type);
-          // handleTimeout(context);
+          if (type == AppString.kDuel) {
+            handleTimeout(context);
+          } else {
+            nextQuestion(context, type, second: 0);
+            startTimer(context, type);
+          }
           // Add your "time's up" logic here
         }
       } else {
@@ -114,12 +151,11 @@ class QuizController extends GetxController {
   hangleWinLose(BuildContext context, String type) {
     showDialog(
       barrierDismissible: false,
-      // barrierColor: AppColors.kOpacityBackGround,
       context: context,
       builder: (context) {
         if (winCount.value > loseCount.value) {
           // Player is winning
-          return YouWinDialog();
+          return type == AppString.kDuel ? DuelYouWinDialog() : YouWinDialog();
         } else {
           return YouLoseDialog(
             actionPlayAgain: () {
@@ -138,25 +174,38 @@ class QuizController extends GetxController {
 
   handleTimeout(BuildContext context) async {
     showMessage("message===> TIME OUT");
-    // showDialog(
-    //   barrierDismissible: false,
-    //   barrierColor: AppColors.kOpacityBackGround,
-    //   context: context,
-    //   builder: (context) {
-    //     return timesUpDialog(
-    //       totalDiamond: '10',
-    //       actionRevive: () {
-    //         remainingSeconds.value = 5;
-    //         remainingSeconds.refresh();
-    //         startTimer(Get.context!); // also use Get.context here
-    //         Get.back();
-    //       },
-    //       actionQuit: () {
-    //         handleQuit(context);
-    //       },
-    //     );
-    //   },
-    // );
+    showDialog(
+      barrierDismissible: false,
+      // barrierColor: AppColors.kOpacityBackGround,
+      context: context,
+      builder: (context) {
+        return DuelTimeOutDialog();
+        // return timesUpDialog(
+        //   totalDiamond: '10',
+        //   actionRevive: () {
+        //     remainingSeconds.value = 5;
+        //     remainingSeconds.refresh();
+        //     startTimer(Get.context!); // also use Get.context here
+        //     Get.back();
+        //   },
+        //   actionQuit: () {
+        //     handleQuit(context);
+        //   },
+        // );
+      },
+    );
+  }
+
+  handleAbandonedDialog(BuildContext context) async {
+    showMessage("message===> Abandoned Dialog");
+    showDialog(
+      barrierDismissible: false,
+      // barrierColor: AppColors.kOpacityBackGround,
+      context: context,
+      builder: (context) {
+        return AbandonedDialog();
+      },
+    );
   }
 
   handleQuit(BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/view/screen/auth/login.dart';
+import 'package:brain_bucks/view/screen/friends_screen/friends_list_screen.dart';
 import 'package:brain_bucks/view/screen/home_screen/single_player_dialog.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,8 @@ class DuelPlayerDialog extends StatelessWidget {
             image: DefaultImages.standardSessionImage,
             bg: DefaultImages.soloSessionBgImage,
             onPressed: () {
-              // Get.to(() => GamesScreen(type: AppString.kSoloStreakSession));
+              Get.back();
+              Get.to(() => FriendsListScreen(isDuel: true,));
             },
           ),
           verticalSpace(16),

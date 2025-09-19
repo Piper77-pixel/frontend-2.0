@@ -74,7 +74,7 @@ Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, to
   );
 }
 
-Widget shadowCoinWidget(String total, {bool isSpark = false, bool isIcon = true, double? font, double? icon, double? height, String? bg}) {
+Widget shadowCoinWidget(String total, {bool isSpark = false, bool isIcon = true, double? font, double? icon, double? height, String? bg,String?iconImage}) {
   return Container(
     height: height ?? 24,
     // width: 60,
@@ -88,7 +88,7 @@ Widget shadowCoinWidget(String total, {bool isSpark = false, bool isIcon = true,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        isIcon ? assetImage(isSpark ? DefaultImages.sparkIcon : DefaultImages.coinIcon, w: icon ?? 20, h: icon ?? 20) : SizedBox(),
+        isIcon ? assetImage(iconImage??(isSpark ? DefaultImages.sparkIcon : DefaultImages.coinIcon), w: icon ?? 20, h: icon ?? 20) : SizedBox(),
         Text(total, style: pNunitoExtraBold10.copyWith(fontSize: font ?? 10)),
       ],
     ),

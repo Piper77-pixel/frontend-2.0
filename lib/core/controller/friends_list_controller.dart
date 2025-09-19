@@ -39,7 +39,6 @@ class FriendsListController extends GetxController {
       "time": '1d',
       "friendList": [DefaultImages.profileImage, DefaultImages.profile1Image],
     },
-
   ].obs;
   RxList friendsList = [
     {
@@ -80,7 +79,5 @@ class FriendsListController extends GetxController {
       "title": 'New Update Is Here!',
       "description": 'We\'ve just rolled out the latest version packed with fresh content, performance improvements, and exciting new features. Jump in now and explore what\'s new!',
     },
-
-
   ].obs;
 }
