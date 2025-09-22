@@ -77,15 +77,14 @@ class _DuelVsScreenState extends State<DuelVsScreen> with TickerProviderStateMix
   Widget appBarWidget(String coin, String spark) {
     return Container(
       height: Get.height * 0.123,
-      decoration: BoxDecoration(image: DecorationImage(image: AssetImage(DefaultImages.duelVsAppbarImage), fit: BoxFit.fill)),
-      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-      child: SafeArea(
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [shadowCoinWidget(spark, font: 11, icon: 24, height: 26, isSpark: true), shadowCoinWidget(coin, font: 11, icon: 24, height: 26)],
-          ),
-        ),
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(DefaultImages.duelVsAppbarImage), fit: BoxFit.fill),
+      ),
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [shadowCoinWidget(spark, font: 11, icon: 24, height: 26, isSpark: true), shadowCoinWidget(coin, font: 11, icon: 24, height: 26)],
       ),
     );
   }
@@ -93,7 +92,7 @@ class _DuelVsScreenState extends State<DuelVsScreen> with TickerProviderStateMix
 
 Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, level2, friendName}) {
   return Padding(
-    padding: EdgeInsets.only(top: Get.height*0.064),
+    padding: EdgeInsets.only(top: Get.height * 0.064),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -106,7 +105,7 @@ Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, l
               borderRadius: BorderRadius.circular(0),
               image: DecorationImage(image: AssetImage(DefaultImages.myProfileBgImage), fit: BoxFit.fill),
             ),
-            padding: EdgeInsets.symmetric(vertical: Get.height*0.02),
+            padding: EdgeInsets.symmetric(vertical: Get.height * 0.02),
             child: Column(
               children: [
                 profileWidget(profileImage1, Size(Get.width * 0.25, Get.height * 0.116), padding: 0), //95
@@ -117,7 +116,7 @@ Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, l
             ),
           ),
         ),
-        assetImage(DefaultImages.circleVsImage,h: Get.height*0.12,w: Get.width),
+        assetImage(DefaultImages.circleVsImage, h: Get.height * 0.12, w: Get.width),
         Padding(
           padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
           child: Container(
@@ -127,7 +126,7 @@ Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, l
               borderRadius: BorderRadius.circular(0),
               image: DecorationImage(image: AssetImage(DefaultImages.friendProfileBgImage), fit: BoxFit.fill),
             ),
-            padding: EdgeInsets.symmetric(vertical: Get.height*0.02),
+            padding: EdgeInsets.symmetric(vertical: Get.height * 0.02),
             child: Column(
               children: [
                 profileWidget(profileImage2, Size(Get.width * 0.25, Get.height * 0.116), color: AppColors.kHex2A5510, padding: 0), //95
@@ -139,7 +138,7 @@ Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, l
           ),
         ),
         Padding(
-          padding:  EdgeInsets.fromLTRB(16,0 /*Get.height*0.057*/, 16, Get.height*0.045),
+          padding: EdgeInsets.fromLTRB(16, 0 /*Get.height*0.057*/, 16, Get.height * 0.045),
           child: CommonThemeButton(
             title: AppString.kCancel.tr,
             isBlack: true,

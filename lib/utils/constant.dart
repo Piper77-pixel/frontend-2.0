@@ -44,7 +44,7 @@ class AppString {
   static String kStartADuel = 'START A DUEL';
   static String kStartASingle = 'START A SINGLE';
   static String kLevel = 'Level';
-  static String kSinglePlayerGame= 'Single player game';
+  static String kSinglePlayerGame = 'Single player game';
   static String kSoloStreakSession = 'Solo Streak Session';
   static String kTopicMasterySession = 'Topic Mastery Session';
   static String kTimeBlitzSession = 'Time Blitz Session';
@@ -57,11 +57,12 @@ class AppString {
   static String kCollect = 'COLLECT';
   static String kCorrect = 'Correct';
   static String kChooseATopic = 'Choose a Topic';
-  static String kCancel= 'Cancel';
+  static String kCancel = 'Cancel';
   static String kShareOn = 'Share on:';
   static String kAmassyourfortuneunlockexclusiverewardsandletyourintellectpaydividends = 'Amass your fortune, unlock exclusive rewards, and let your intellect pay dividends.';
   static String kDivedeepintodiversetopicsandexperiencethethrillofintellectualdiscovery = 'Dive deep into diverse topics, and experience the thrill of intellectual discovery.';
-  static String kVictoryisntanoptionOutsmartopponentsconquerchallengesandproveyourintellectualsupremacy = 'Victory isn\'t an option. Outsmart opponents, conquer challenges and prove your intellectual supremacy.';
+  static String kVictoryisntanoptionOutsmartopponentsconquerchallengesandproveyourintellectualsupremacy =
+      'Victory isn\'t an option. Outsmart opponents, conquer challenges and prove your intellectual supremacy.';
   static String kDuelPlayerGame = 'Duel player game';
   static String kStandardSession = 'Standard Session';
   static String kEliminationSession = 'Elimination Session';
@@ -93,8 +94,17 @@ class AppString {
   static String kLifeline = 'Lifeline';
   static String kAnswer = 'Answer';
   static String kYourScore = 'Your score:';
-  static String kHighest= 'Highest:';
-  static String kSessionCompleted= 'Session\nCompleted';
-  static String kClaimReward= 'CLAIM REWARD';
-  static String k= '';
+  static String kHighest = 'Highest:';
+  static String kSessionCompleted = 'Session\nCompleted';
+  static String kClaimReward = 'CLAIM REWARD';
+  static String kTasks = 'Tasks';
+  static String kGameplay = 'Gameplay';
+  static String kAchievements = 'Achievements';
+  static String kLogOut = 'Log-out';
+  static String kPlayNow = 'PLAY NOW!';
+  static String kPro = 'Pro';
+  static String kMaster = 'Master';
+  static String kBeginner = 'Beginner';
+  static String kCompleted = 'Completed!';
+  static String k = '';
 }

@@ -87,6 +87,26 @@ class DefaultImages {
   static String Image = '';
 
   static String Icon = '';
+  static String icDuelIcon = 'assets/icons/ic_duel.png';
+  static String icGreenFlagIcon = 'assets/icons/ic_green_flag.png';
+  static String icRedFlagIcon = 'assets/icons/ic_red_flag.png';
+  static String icQuestionIcon = 'assets/icons/ic_question.png';
+    static String flashPurpleIcon = 'assets/icons/flash_purple.png';
+  static String diamondIcon = 'assets/icons/diamond.png';
+  static String doneIcon = 'assets/icons/done.png';
+  static String greenBadgesIcon = 'assets/icons/green_badges.png';
+  static String greyBadgesIcon = 'assets/icons/grey_badges.png';
+  static String fireRedIcon = 'assets/icons/fire_red.png';
+  static String firePurpleIcon = 'assets/icons/fire_purple.png';
+  static String fireBlueIcon = 'assets/icons/fire_blue.png';
+  static String taskIconBgIcon = 'assets/icons/task_icon_bg.png';
+  static String logoutIcon = 'assets/icons/logout.png';
+  static String taskIcon = 'assets/icons/ic_task.png';
+  static String gameplayIcon = 'assets/icons/ic_gameplay.png';
+  static String challengeIcon = 'assets/icons/ic_challenge.png';
+  static String achivementIcon = 'assets/icons/ic_achivement.png';
+  static String arrowNextIcon = 'assets/icons/arrow_next.png';
+  static String arrowRightIcon = 'assets/icons/arrow_right.png';
   static String instagramIcon = 'assets/icons/instagram.png';
   static String alarmIcon = 'assets/icons/alarm.png';
   static String facebookIcon = 'assets/icons/facebook.png';
@@ -138,4 +158,7 @@ class DefaultImages {
   static String notificationBlueImage = 'assets/dummy_image/notification_blue.png';
   static String notificationPurpleImage = 'assets/dummy_image/notification_purple.png';
   static String notificationYellowImage = 'assets/dummy_image/notification_yellow.png';
+  static String masterScienceImage = 'assets/dummy_image/master_sicence.png';
+  static String smallSummerChallengeImage = 'assets/dummy_image/small_summer_challenge.png';
+  static String weekendWarriorImage = 'assets/dummy_image/weekend_warrior.png';
 }

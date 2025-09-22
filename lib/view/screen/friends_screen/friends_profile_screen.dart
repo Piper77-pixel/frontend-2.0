@@ -107,8 +107,9 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
         ? CommonButton(onPressed: onTap, title: AppString.kRequested.tr, height: 40, horizontal: 5, fontSize: 15)
         : CommonThemeButton(onPressed: onTap, title: AppString.kREQUEST.tr, icon: DefaultImages.addCircleIcon, height: 40, horizontal: 5, fontSize: 15);
   }
+}
 
-  Widget leftWinUserWidget({bool isRight = false, String? profileImage, name, level}) {
+Widget leftWinUserWidget({bool isRight = false, String? profileImage, name, level}) {
     return Stack(
       alignment: isRight ? Alignment.topRight - Alignment(-.3, 0) : Alignment.topLeft - Alignment(0.3, 0),
       children: [
@@ -157,7 +158,6 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
       ],
     );
   }
-}
 
 Container profileCircleWidget(bool isRight, String? image) {
   return Container(

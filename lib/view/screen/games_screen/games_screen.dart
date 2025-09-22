@@ -47,7 +47,7 @@ class _GamesScreenState extends State<GamesScreen> {
     quizController.winCount.value = 0;
     quizController.loseCount.value = 0;
     quizController.selectedAnswerIndex.value = -1;
-    // quizController.startTimer(context, widget.type);
+    quizController.startTimer(context, widget.type);
   }
 
   @override
@@ -521,7 +521,7 @@ class _GamesScreenState extends State<GamesScreen> {
                       Text(name!, style: isSelected == true ? pRobotoBold10.copyWith(fontSize: 16) : pRobotoRegular10.copyWith(fontSize: 16)),
                     ],
                   ),
-                  widget!,
+                  widget??SizedBox( width: 0,height: 0,),
                 ],
               ),
             ),

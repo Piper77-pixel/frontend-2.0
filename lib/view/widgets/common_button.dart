@@ -45,46 +45,49 @@ class CommonThemeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      padding: EdgeInsets.zero,
-      pressedOpacity: 0.2,
-      onPressed: onPressed,
-      child: Container(
-        width: width ?? Get.width,
-        height: height ?? 56,
-        decoration: BoxDecoration(
-          // color: btnColor ?? AppColors.kThemeColor,
-          color: isBlack == true ? AppColors.kText : AppColors.kThemeColor,
-          image: DecorationImage(
-            image: AssetImage(
-              bgImage == null
-                  ? isBlack
-                        ? DefaultImages.greyButtonImage
-                        : DefaultImages.themeButtonImage
-                  : bgImage!,
-            ),
-            fit: BoxFit.fill,
-          ),
-          borderRadius: BorderRadius.circular(radius ?? AppDimen.buttonRadius),
-          border: Border.all(color: bColor ?? AppColors.kTransparent),
-        ),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (icon != null) SizedBox(width: icnSize??28, height: icnSize??28, child: assetImage(icon!)),
-              if (icon != null) horizontalSpace(horizontal ?? 8),
-              Text(
-                title!,
-                style: pNunitoBold10.copyWith(
-                  color: textColor ?? AppColors.kFont,
-                  fontSize: fontSize ?? 22, //14
-                  fontWeight: fontWeight ?? FontWeight.w900,
-                ),
-                textAlign: TextAlign.center,
+    return SizedBox(
+      height: height ?? 56,
+      child: CupertinoButton(
+        // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.zero,
+        pressedOpacity: 0.2,
+        onPressed: onPressed,
+        child: Container(
+          width: width ?? Get.width,
+          height: height ?? 56,
+          decoration: BoxDecoration(
+            // color: btnColor ?? AppColors.kThemeColor,
+            color: isBlack == true ? AppColors.kText : AppColors.kThemeColor,
+            image: DecorationImage(
+              image: AssetImage(
+                bgImage == null
+                    ? isBlack
+                          ? DefaultImages.greyButtonImage
+                          : DefaultImages.themeButtonImage
+                    : bgImage!,
               ),
-            ],
+              fit: BoxFit.fill,
+            ),
+            borderRadius: BorderRadius.circular(radius ?? AppDimen.buttonRadius),
+            border: Border.all(color: bColor ?? AppColors.kTransparent),
+          ),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (icon != null) SizedBox(width: icnSize??28, height: icnSize??28, child: assetImage(icon!)),
+                if (icon != null) horizontalSpace(horizontal ?? 8),
+                Text(
+                  title!,
+                  style: pNunitoBold10.copyWith(
+                    color: textColor ?? AppColors.kFont,
+                    fontSize: fontSize ?? 22, //14
+                    fontWeight: fontWeight ?? FontWeight.w900,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),

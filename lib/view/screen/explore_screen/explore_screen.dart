@@ -15,11 +15,11 @@ class ExploreScreen extends StatelessWidget {
       child: Column(
         children: [
           challengeAppBar(AppString.kExplore.tr),
-          Expanded(
-            child: Obx(() {
-              return ListView(shrinkWrap: true, padding: EdgeInsets.fromLTRB(16, 24, 16, 20), children: []);
-            }),
-          ),
+          // Expanded(
+          //   child: Obx(() {
+          //     return ListView(shrinkWrap: true, padding: EdgeInsets.fromLTRB(16, 24, 16, 20), children: []);
+          //   }),
+          // ),
         ],
       ),
     );
