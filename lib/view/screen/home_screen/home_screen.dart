@@ -2,11 +2,13 @@ import 'dart:ui';
 
 import 'package:brain_bucks/core/controller/home_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/icons.dart';
 import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/prefer.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/show_auth_dialog.dart';
 import 'package:brain_bucks/view/screen/home_screen/duel_player_dialog.dart';
@@ -99,22 +101,16 @@ class HomeScreen extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Container(
-            height: Get.height * 0.157,
-            width: Get.width,
-            decoration: BoxDecoration(
-              // color: AppColors.kOpacityBackGround,
-              color: AppColors.kBlack.withOpacity(0.4),
-              borderRadius: BorderRadiusGeometry.circular(12),
-            ),
+            // height: Get.height * 0.157,
+            height: SizeConfig.h(127),
+            width: SizeConfig.screenWidth,
+            decoration: boxDecoration(color: AppColors.kBlack.withOpacity(0.4), radius: 12),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
               child: Container(
-                height: Get.height * 0.157,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadiusGeometry.circular(12),
-                  border: Border.all(color: AppColors.kGreyBorder),
-                ),
+                height: SizeConfig.h(127),
+                width: SizeConfig.screenWidth,
+                decoration: boxDecoration(radius: 12, bColor: AppColors.kGreyBorder),
                 child: Center(
                   child: CircleAvatar(backgroundColor: AppColors.kOpacityBackGround, radius: 35, child: assetImage(DefaultImages.lock3DIcon, h: 35)),
                 ),
@@ -130,11 +126,11 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
       child: Container(
-        width: Get.width,
-        decoration: BoxDecoration(
-          image: match.isWinner ? DecorationImage(image: AssetImage(DefaultImages.homeWinConfettiImage)) : null,
+        width: SizeConfig.screenWidth,
+        decoration: boxDecoration(
+          decorationImage: match.isWinner ? DecorationImage(image: AssetImage(DefaultImages.homeWinConfettiImage)) : null,
           gradient: LinearGradient(colors: AppColors.linerGameColor, begin: AlignmentGeometry.topCenter, end: AlignmentGeometry.bottomCenter),
-          borderRadius: BorderRadius.circular(16),
+          radius: 16,
           border: GradientBoxBorder(
             gradient: LinearGradient(
               colors: match.isWinner ? AppColors.linerGreenBorderColor : AppColors.linerRedBorderColor,
@@ -188,11 +184,11 @@ class HomeScreen extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: Get.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(DefaultImages.winnerConfettiImage)),
+            width: SizeConfig.screenWidth,
+            decoration: boxDecoration(
+              decorationImage: DecorationImage(image: AssetImage(DefaultImages.winnerConfettiImage)),
               gradient: LinearGradient(colors: AppColors.linerGameColor, begin: AlignmentGeometry.topCenter, end: AlignmentGeometry.bottomCenter),
-              borderRadius: BorderRadius.circular(16),
+              radius: 16,
               border: GradientBoxBorder(
                 gradient: LinearGradient(colors: AppColors.linerGreenBorderColor, begin: Alignment.topCenter, end: Alignment.bottomCenter, stops: [0.0, 0.0, 0.99, 0.0]),
                 width: 1,
@@ -227,11 +223,10 @@ class HomeScreen extends StatelessWidget {
         Container(
           height: 48,
           width: 120,
-          decoration: BoxDecoration(
+          decoration: boxDecoration(
             // color: Colors.yellow,
-            image: DecorationImage(image: AssetImage(isRight ? DefaultImages.homeRightImage : DefaultImages.homeLeftImage), fit: BoxFit.fill),
+            decorationImage: DecorationImage(image: AssetImage(isRight ? DefaultImages.homeRightImage : DefaultImages.homeLeftImage), fit: BoxFit.fill),
           ),
-          // padding: EdgeInsets.only(left: isRight ? 16 : 10, right: isRight ? 0 : 16),
           padding: EdgeInsets.only(left: isRight ? 12 : 0, right: isRight ? 0 : 16),
           child: Column(
             crossAxisAlignment: isRight ? CrossAxisAlignment.start : CrossAxisAlignment.end,

@@ -1,4 +1,6 @@
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/games_screen/circular_count_down.dart';
 import 'package:brain_bucks/view/screen/home_screen/home_profile_appbar.dart';
@@ -20,13 +22,14 @@ class GameProfileAppbar extends StatelessWidget {
       children: [
         Container(
           // height: 150,
-          height: Get.height * 0.18,
-          width: Get.width,
-          decoration: BoxDecoration(
-            // color: Colors.red,
-            image: DecorationImage(image: AssetImage(DefaultImages.appbarBgImage), fit: BoxFit.fill),
+          // height: Get.height * 0.18,
+          height: SizeConfig.h(146),
+          width: SizeConfig.screenWidth,
+          decoration: boxDecoration(
+            radius: 0,
+            decorationImage: DecorationImage(image: AssetImage(DefaultImages.appbarBgImage), fit: BoxFit.fill),
           ),
-          padding: EdgeInsets.fromLTRB(16, 0, 30, Get.height * 0.0),
+          padding: EdgeInsets.fromLTRB(16, 0, 30, SizeConfig.h(0)),
           child: SafeArea(
             child: Center(
               child: Row(

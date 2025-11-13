@@ -1,8 +1,10 @@
 import 'package:brain_bucks/core/controller/friends_list_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/home_screen/home_profile_appbar.dart';
 import 'package:brain_bucks/view/widgets/bg_image_widget.dart';
@@ -116,8 +118,9 @@ Widget leftWinUserWidget({bool isRight = false, String? profileImage, name, leve
         Container(
           height: 75,
           // width: 147,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(isRight ? DefaultImages.loseCountBgImage : DefaultImages.winCountBgImage), fit: BoxFit.fill),
+          decoration: boxDecoration(
+            radius: 0,
+            decorationImage: DecorationImage(image: AssetImage(isRight ? DefaultImages.loseCountBgImage : DefaultImages.winCountBgImage), fit: BoxFit.fill),
           ),
           padding: EdgeInsets.only(left: isRight ? 24 : 0, right: isRight ? 0 : 30),
           child: Align(
@@ -132,7 +135,7 @@ Widget leftWinUserWidget({bool isRight = false, String? profileImage, name, leve
                   child: Container(
                     height: 26,
                     width: 26,
-                    decoration: BoxDecoration(
+                    decoration: boxShapeDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
                         colors: isRight ? [AppColors.kHexE60F2F, AppColors.kHexAB0529] : [AppColors.kHex0FE673, AppColors.kHex05AB4A],
@@ -163,7 +166,7 @@ Container profileCircleWidget(bool isRight, String? image) {
   return Container(
     width: 58,
     height: 58,
-    decoration: BoxDecoration(
+    decoration: boxShapeDecoration(
       color: AppColors.kHex111011,
       shape: BoxShape.circle,
       border: Border.all(color: isRight ? AppColors.kHexEB4435 : AppColors.kHex2CBD6D, width: 1),
@@ -187,12 +190,14 @@ class FriendsProfileAppbar extends StatelessWidget {
       alignment: Alignment.center - Alignment(0, -0.5),
       children: [
         Container(
-          height: Get.height * 0.23,
-          width: Get.width,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(DefaultImages.friendsAppbarImage), fit: BoxFit.fill),
+          // height: Get.height * 0.23,
+          height: SizeConfig.h(187),
+          width: SizeConfig.screenWidth,
+          decoration: boxDecoration(
+            radius: 0,
+            decorationImage: DecorationImage(image: AssetImage(DefaultImages.friendsAppbarImage), fit: BoxFit.fill),
           ),
-          padding: EdgeInsets.fromLTRB(16, 0, 16, Get.height * 0.08),
+          padding: EdgeInsets.fromLTRB(16, 0, 16, SizeConfig.h(65)),
           child: SafeArea(
             child: Center(
               child: Row(
@@ -217,13 +222,13 @@ class FriendsProfileAppbar extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, Get.height * 0.00),
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0.00),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              profileWidget(profileImage, Size(Get.width * 0.25, Get.height * 0.116)), //95
+              profileWidget(profileImage, Size(SizeConfig.w(95),SizeConfig.h(95))), //95
               verticalSpace(4),
-              Text(profileName, style: pRobotoMedium10.copyWith(fontSize: Get.width * 0.05)), //20
+              Text(profileName, style: pRobotoMedium10.copyWith(fontSize: SizeConfig.sp(20))), //20
               verticalSpace(4),
               Text('${AppString.kLevel.tr} $level', style: pRobotoMedium10.copyWith(fontSize: 14, color: AppColors.kWhite.withOpacity(0.4))),
             ],

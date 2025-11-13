@@ -1,7 +1,9 @@
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/view/screen/auth/login.dart';
 import 'package:brain_bucks/view/screen/friends_screen/friends_list_screen.dart';
 import 'package:brain_bucks/view/screen/home_screen/single_player_dialog.dart';
@@ -15,11 +17,11 @@ class DuelPlayerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width,
-      decoration: BoxDecoration(
+      width: SizeConfig.screenWidth,
+      decoration: boxDecoration(
         color: AppColors.kBackGround,
-        borderRadius: BorderRadius.circular(AppDimen.smallRadius),
-        image: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
+        radius: AppDimen.smallRadius,
+        decorationImage: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
       ),
       padding: EdgeInsets.symmetric(vertical: AppDimen.padding, horizontal: 8),
       child: Column(
@@ -33,7 +35,7 @@ class DuelPlayerDialog extends StatelessWidget {
             bg: DefaultImages.soloSessionBgImage,
             onPressed: () {
               Get.back();
-              Get.to(() => FriendsListScreen(isDuel: true,));
+              Get.to(() => FriendsListScreen(isDuel: true));
             },
           ),
           verticalSpace(16),

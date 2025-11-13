@@ -1,4 +1,5 @@
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
@@ -17,9 +18,9 @@ class Onboarding1 extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: assetImage(DefaultImages.p1CoinImage, fit: BoxFit.cover, h: Get.height * 0.48),
+            child: assetImage(DefaultImages.p1CoinImage, fit: BoxFit.cover, h: SizeConfig.h(390)),
           ),
-          verticalSpace(Get.height * 0.092),
+          verticalSpace(SizeConfig.h(75)),
           assetImage(data["image"]),
           verticalSpace(4),
           Text(data["title"], style: pRobotoRegular10.copyWith(fontSize: 18), textAlign: TextAlign.center),
@@ -46,7 +47,7 @@ class Onboarding2 extends StatelessWidget {
           child: Text(data["title"], style: pRobotoRegular10.copyWith(fontSize: 18), textAlign: TextAlign.center),
         ),
         Expanded(
-          child: assetImage(DefaultImages.p2BulbImage, fit: BoxFit.fitWidth, /* h: Get.height * 0.48,*/ w: Get.width),
+          child: assetImage(DefaultImages.p2BulbImage, fit: BoxFit.fitWidth, /* h: Get.height * 0.48,*/ w: SizeConfig.screenWidth),
         ),
       ],
     );
@@ -63,9 +64,9 @@ class Onboarding3 extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: assetImage(DefaultImages.p3WinnerTrophyImage, fit: BoxFit.fitWidth, h: Get.height * 0.48, w: Get.width),
+          child: assetImage(DefaultImages.p3WinnerTrophyImage, fit: BoxFit.fitWidth, h:SizeConfig.h(390), w: SizeConfig.screenWidth),
         ),
-        verticalSpace(Get.height * 0.092),
+        verticalSpace(SizeConfig.h(75)),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 32), child: assetImage(data["image"], w: 281)),
         verticalSpace(4),
         Padding(

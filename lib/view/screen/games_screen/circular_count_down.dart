@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:brain_bucks/core/controller/game_controller/quiz_controller.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -41,7 +42,7 @@ class _CircularCountdownState extends State<CircularCountdown> {
         center: Container(
           width: 70,
           height: 70,
-          decoration: BoxDecoration(shape: BoxShape.circle),
+          decoration: boxShapeDecoration(shape: BoxShape.circle),
           child: DottedBorder(
             options: CircularDottedBorderOptions(
               dashPattern: [5, 5],

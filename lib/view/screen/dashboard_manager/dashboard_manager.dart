@@ -1,7 +1,9 @@
 import 'package:brain_bucks/core/controller/dashboard_controller.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/prefer.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/show_auth_dialog.dart';
 import 'package:brain_bucks/view/widgets/bg_image_widget.dart';
@@ -46,17 +48,18 @@ class _DashboardManagerState extends State<DashboardManager> {
           statusBarBrightness: Brightness.dark,
         ),
         child: Container(
-          height: Get.height,
-          width: Get.width,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(DefaultImages.bgImage), fit: BoxFit.fill),
+          height: SizeConfig.screenHeight,
+          width: SizeConfig.screenWidth,
+          decoration: boxDecoration(
+            radius: 0,
+            decorationImage: DecorationImage(image: AssetImage(DefaultImages.bgImage), fit: BoxFit.fill),
           ),
           child: Scaffold(
             backgroundColor: AppColors.kTransparent,
             body: dashboardController.itemList[dashboardController.selectedIndex.value]['screen'],
             bottomNavigationBar: Container(
               padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-              decoration: BoxDecoration(
+              decoration: boxDecoration(
                 color: AppColors.kBottomNavibar,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                 border: Border(top: BorderSide(color: AppColors.kWhite.withOpacity(0.2))),
@@ -94,8 +97,9 @@ class _DashboardManagerState extends State<DashboardManager> {
       onTap: onTap,
       child: Container(
         width: 80,
-        decoration: BoxDecoration(
-          image: isSelected ? DecorationImage(image: AssetImage(DefaultImages.selectedTabIcon), fit: BoxFit.fill) : null,
+        decoration: boxDecoration(
+          radius: 0,
+          decorationImage: isSelected ? DecorationImage(image: AssetImage(DefaultImages.selectedTabIcon), fit: BoxFit.fill) : null,
         ),
         padding: EdgeInsets.symmetric(vertical: 6),
         child: Column(

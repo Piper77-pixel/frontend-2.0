@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/login.dart';
 import 'package:brain_bucks/view/screen/games_screen/choose_topic_dialog.dart';
@@ -39,11 +41,11 @@ class SinglePlayerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width,
-      decoration: BoxDecoration(
+      width: SizeConfig.screenWidth,
+      decoration: boxDecoration(
         color: AppColors.kBackGround,
-        borderRadius: BorderRadius.circular(AppDimen.smallRadius),
-        image: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
+        radius: AppDimen.smallRadius,
+        decorationImage: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
       ),
       padding: EdgeInsets.symmetric(vertical: AppDimen.padding, horizontal: 8),
       child: Column(
@@ -89,12 +91,13 @@ class SinglePlayerDialog extends StatelessWidget {
 
 Widget sessionWidget({required String title, required String image, required String bg, required Function()? onPressed}) {
   return Container(
-    height: Get.height * 0.11,
+    height: SizeConfig.h(89),
     //height: 86,
-    width: Get.width,
+    width: SizeConfig.screenWidth,
     padding: EdgeInsets.fromLTRB(35, 0, 35, 0),
-    decoration: BoxDecoration(
-      image: DecorationImage(image: AssetImage(bg), fit: BoxFit.fill),
+    decoration: boxDecoration(
+      decorationImage: DecorationImage(image: AssetImage(bg), fit: BoxFit.fill),
+      radius: 0
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

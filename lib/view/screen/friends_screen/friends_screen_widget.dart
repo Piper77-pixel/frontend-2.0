@@ -1,4 +1,5 @@
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
@@ -89,9 +90,9 @@ Widget friendRequestsWidget({
   return Padding(
     padding: const EdgeInsets.only(bottom: 8.0),
     child: Container(
-      decoration: BoxDecoration(
+      decoration: boxDecoration(
         color: AppColors.kBlack,
-        borderRadius: BorderRadius.circular(AppDimen.buttonRadius),
+        radius:AppDimen.buttonRadius,
         border: GradientBoxBorder(
           gradient: LinearGradient(colors: [AppColors.kThemeFont, AppColors.kHex7127CF], stops: [0.0, 1.0], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           width: 1,
@@ -105,7 +106,7 @@ Widget friendRequestsWidget({
             child: Container(
               height: profileSize ?? 72,
               width: profileSize ?? 72,
-              decoration: BoxDecoration(
+              decoration: boxShapeDecoration(
                 color: AppColors.kBlack,
                 shape: BoxShape.circle,
                 border: GradientBoxBorder(gradient: LinearGradient(colors: [AppColors.kHex60148C, AppColors.kHexC674F7] /*begin: Alignment.topRight, end: Alignment.bottomCenter*/), width: 1.36),
@@ -115,9 +116,9 @@ Widget friendRequestsWidget({
                 child: Container(
                   // height: 64,
                   // width: 64,
-                  decoration: BoxDecoration(
+                  decoration: boxShapeDecoration(
                     shape: BoxShape.circle,
-                    image: DecorationImage(image: NetworkImage(profile!)),
+                    decorationImage: DecorationImage(image: NetworkImage(profile!)),
                   ),
                 ),
               ),
@@ -175,9 +176,9 @@ Container smallProfileImage(String image) {
   return Container(
     height: 20,
     width: 20,
-    decoration: BoxDecoration(
+    decoration: boxShapeDecoration(
       shape: BoxShape.circle,
-      image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
+      decorationImage: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
     ),
   );
 }

@@ -1,8 +1,10 @@
 import 'package:brain_bucks/core/controller/game_controller/quiz_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/games_screen/game_screen_widget.dart';
 import 'package:brain_bucks/view/screen/home_screen/home_profile_appbar.dart';
@@ -10,6 +12,7 @@ import 'package:brain_bucks/view/widgets/bg_image_widget.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auto_size_text/flutter_auto_size_text.dart';
 import 'package:get/get.dart';
 
 class GamesScreen extends StatefulWidget {
@@ -74,13 +77,13 @@ class _GamesScreenState extends State<GamesScreen> {
                       : quizController.showWin.value == true
                       ? Align(
                           alignment: AlignmentGeometry.topCenter,
-                          child: assetImage(DefaultImages.winConfettiImage, w: Get.width, fit: BoxFit.cover, h: 400),
+                          child: assetImage(DefaultImages.winConfettiImage, w: SizeConfig.screenWidth, fit: BoxFit.cover, h: 400),
                         )
                       : SizedBox(),
 
                   ListView(
                     shrinkWrap: true,
-                    padding: EdgeInsets.only(top: Get.height * 0.025),
+                    padding: EdgeInsets.only(top: SizeConfig.h(20)),
                     physics: BouncingScrollPhysics(),
                     // padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
                     children: [
@@ -110,9 +113,10 @@ class _GamesScreenState extends State<GamesScreen> {
                                             profileImage: DefaultImages.profileImage,
                                             level: '32',
                                             pointList: quizController.playerList,
+                                            bColor: AppColors.kHex2A5510,
                                           ),
                                         ),
-                                        verticalSpace(Get.height * 0.022), //20
+                                        verticalSpace(SizeConfig.h(20)), //20
                                         playerPointWidget(
                                           bgImage: DefaultImages.duelYouPointBgImage,
                                           name: AppString.kYou.tr,
@@ -134,11 +138,11 @@ class _GamesScreenState extends State<GamesScreen> {
                                       child: Text(
                                         '${AppString.kQuestion.tr} : ${quizController.question.value + 1}',
                                         style: pNunitoExtraBold10.copyWith(
-                                          fontSize: Get.height * 0.026, //24
+                                          fontSize: SizeConfig.sp(21), //24
                                         ),
                                       ),
                                     ),
-                              verticalSpace(Get.height * 0.022), //20
+                              verticalSpace(SizeConfig.h(17)), //20
                               Container(
                                 // color: Colors.green,
                                 // padding: EdgeInsetsGeometry.only(top: Get.height * 0.02),
@@ -148,25 +152,26 @@ class _GamesScreenState extends State<GamesScreen> {
                                   children: [
                                     Container(
                                       // height: Get.height * 0.45,
-                                      width: Get.width,
-                                      margin: EdgeInsets.only(top: widget.type == AppString.kDuel ? 0 : Get.height * 0.08),
+                                      width: SizeConfig.screenWidth,
+                                      margin: EdgeInsets.only(top: widget.type == AppString.kDuel ? 0 : SizeConfig.h(64)),
                                       //70
-                                      decoration: BoxDecoration(
+                                      decoration: boxDecoration(
                                         // color: Colors.red,
-                                        image: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
-                                        borderRadius: BorderRadius.circular(AppDimen.smallRadius),
+                                        decorationImage: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
+                                        radius: AppDimen.smallRadius,
                                       ),
                                       // padding: EdgeInsets.fromLTRB(13, 0, 13, 0),
-                                      padding: widget.type == AppString.kDuel ? EdgeInsets.all(13) : EdgeInsets.fromLTRB(13, Get.height * 0.08, 13, 0),
+                                      padding: widget.type == AppString.kDuel ? EdgeInsets.all(13) : EdgeInsets.fromLTRB(13, SizeConfig.h(66), 13, 0),
                                       child: Column(
                                         // mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
                                           Center(
-                                            child: Text(
+                                            child: AutoSizeText(
                                               que['question'],
-                                              style: pRobotoMedium10.copyWith(fontSize: Get.height * 0.022 /*20*/),
+                                              style: pRobotoMedium10.copyWith(fontSize: SizeConfig.sp(18) /*20*/),
+                                              maxLines: 2,
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
@@ -177,7 +182,7 @@ class _GamesScreenState extends State<GamesScreen> {
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
-                                          verticalSpace(Get.height * 0.023), //23
+                                          verticalSpace(SizeConfig.h(18)), //23
                                           Obx(() {
                                             showMessage("-=-=${quizController.showResult.value}-=-");
 
@@ -267,13 +272,13 @@ class _GamesScreenState extends State<GamesScreen> {
                                             alignment: Alignment.topCenter /*- Alignment(0, 0.6)*/,
                                             child: assetImage(
                                               widget.image ?? DefaultImages.questionImage,
-                                              h: Get.height * 0.160, //135
+                                              h: SizeConfig.h(130), // Get.height * 0.160, //135
                                             ),
                                           ),
                                   ],
                                 ),
                               ),
-                              verticalSpace(Get.height * 0.030),
+                              verticalSpace(SizeConfig.h(24)),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -348,13 +353,13 @@ class _GamesScreenState extends State<GamesScreen> {
     );
   }
 
-  Widget playerPointWidget({String? bgImage, String? profileImage, String? name, String? level, List? pointList}) {
+  Widget playerPointWidget({String? bgImage, String? profileImage, String? name, String? level, List? pointList, Color? bColor}) {
     return Container(
       // height: Get.height * 0.093,
-      width: Get.width,
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(bgImage ?? DefaultImages.duelFriendPointBgImage), fit: BoxFit.fill),
-        borderRadius: BorderRadius.circular(20),
+      width: SizeConfig.screenWidth,
+      decoration: boxDecoration(
+        decorationImage: DecorationImage(image: AssetImage(bgImage ?? DefaultImages.duelFriendPointBgImage), fit: BoxFit.fill),
+        radius: 20,
       ),
       padding: EdgeInsets.all(AppDimen.padding),
       child: Row(
@@ -362,7 +367,7 @@ class _GamesScreenState extends State<GamesScreen> {
         children: [
           Row(
             children: [
-              profileWidget(profileImage, Size(Get.width * 0.106, Get.height * 0.049), padding: 0),
+              profileWidget(profileImage, Size(SizeConfig.w(40), SizeConfig.h(40)), padding: 0, color: bColor),
               horizontalSpace(8),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -406,7 +411,7 @@ class _GamesScreenState extends State<GamesScreen> {
       child: Container(
         // height: 27,
         // width: 52,
-        decoration: BoxDecoration(color: AppColors.kTextField, borderRadius: BorderRadius.circular(20)),
+        decoration: boxDecoration(color: AppColors.kTextField, radius: 20),
         padding: EdgeInsets.symmetric(horizontal: 6, vertical: 5),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [assetImage(DefaultImages.callIcn, w: 10, h: 10), assetImage(profileImage!, w: 25, h: 17)]),
       ),
@@ -436,8 +441,9 @@ class _GamesScreenState extends State<GamesScreen> {
           child: Container(
             width: 84,
             // height: 64,
-            decoration: BoxDecoration(
-              image: DecorationImage(
+            decoration: boxDecoration(
+              radius: 0,
+              decorationImage: DecorationImage(
                 // image: AssetImage(isAvailable == true ? DefaultImages.shadowCircleImage : DefaultImages.circleBgImage),
                 image: AssetImage(DefaultImages.lifeLineBgImage),
                 fit: BoxFit.fill,
@@ -463,7 +469,7 @@ class _GamesScreenState extends State<GamesScreen> {
 
   Widget answerWidget({Function()? onTap, bool? isSelected, bool? isAudience, Color? indicatorColor, String? name, String? number, Widget? widget, String? audiencePercent}) {
     return Padding(
-      padding: EdgeInsets.only(bottom: Get.height * 0.014), //12
+      padding: EdgeInsets.only(bottom: SizeConfig.h(11)), //12
       child: GestureDetector(
         onTap: onTap,
         child: Stack(
@@ -474,7 +480,7 @@ class _GamesScreenState extends State<GamesScreen> {
                   alignment: Alignment.centerLeft,
                   widthFactor: double.tryParse(audiencePercent.toString())! / 100,
                   child: Container(
-                    decoration: BoxDecoration(color: AppColors.kHexAB1DFF.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
+                    decoration: boxDecoration(color: AppColors.kHexAB1DFF.withOpacity(0.2), radius: 8),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 17),
                       child: Align(
@@ -488,12 +494,13 @@ class _GamesScreenState extends State<GamesScreen> {
                 ),
               ),
             Container(
-              height: Get.height * 0.05375,
-              width: Get.width,
-              decoration: BoxDecoration(
+              // height: Get.height * 0.05375,
+              height: SizeConfig.h(43),
+              width: SizeConfig.screenWidth,
+              decoration: boxDecoration(
                 color: indicatorColor,
                 // color: isSelected == true ? AppColors.kAnswerBg : AppColors.kTransparent,
-                borderRadius: BorderRadius.circular(Get.width * 0.03), //15
+                borderRadius: BorderRadius.circular(SizeConfig.w(11)), //15
                 border: Border.all(color: AppColors.kGreyBorder),
               ),
               // padding: EdgeInsets.only(right: 14),
@@ -521,7 +528,7 @@ class _GamesScreenState extends State<GamesScreen> {
                       Text(name!, style: isSelected == true ? pRobotoBold10.copyWith(fontSize: 16) : pRobotoRegular10.copyWith(fontSize: 16)),
                     ],
                   ),
-                  widget??SizedBox( width: 0,height: 0,),
+                  widget ?? SizedBox(width: 0, height: 0),
                 ],
               ),
             ),

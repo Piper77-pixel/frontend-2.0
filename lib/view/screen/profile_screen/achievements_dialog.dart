@@ -2,9 +2,11 @@ import 'dart:ui';
 
 import 'package:brain_bucks/core/controller/profile_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/login.dart';
 import 'package:brain_bucks/view/screen/games_screen/games_screen.dart';
@@ -30,18 +32,18 @@ class AchievementsDialog extends StatelessWidget {
         insetPadding: EdgeInsets.all(AppDimen.padding),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimen.radius)),
         content: Container(
-          width: Get.width,
-          decoration: BoxDecoration(
+          width: SizeConfig.screenWidth,
+          decoration: boxDecoration(
             color: AppColors.kBackGround,
-            borderRadius: BorderRadius.circular(AppDimen.smallRadius),
-            image: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
+            radius: AppDimen.smallRadius,
+            decorationImage: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
           ),
           padding: EdgeInsets.fromLTRB(AppDimen.padding, AppDimen.padding, AppDimen.padding, 0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               authTitleRow(AppString.kAchievements.tr),
-              verticalSpace(Get.height * 0.018), //16
+              verticalSpace(SizeConfig.h(16)), //16
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: profileController.achievementsList.length,
@@ -71,11 +73,7 @@ class AchievementsDialog extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12, left: 14, right: 14),
       child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.kHex161616,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: AppColors.kWhite.withOpacity(0.05)),
-        ),
+        decoration: boxDecoration(color: AppColors.kHex161616, radius: 8, bColor: AppColors.kWhite.withOpacity(0.05)),
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
@@ -123,10 +121,10 @@ class AchievementsDialog extends StatelessWidget {
     return Expanded(
       child: Container(
         // height: Get.height * 0.11,
-        width: Get.width * 0.144,
-        decoration: BoxDecoration(
+        width: SizeConfig.w(54),
+        decoration: boxDecoration(
           // color: AppColors.kGreen,
-          borderRadius: BorderRadius.circular(11),
+          radius: 11,
           border: GradientBoxBorder(
             gradient: SweepGradient(
               colors: [AppColors.kWhite.withOpacity(0.1), AppColors.kWhite.withOpacity(0.05)],
@@ -139,12 +137,12 @@ class AchievementsDialog extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: Get.height * 0.06,
-              width: Get.width * 0.14,
-              decoration: BoxDecoration(
+              height: SizeConfig.h(48),
+              width: SizeConfig.w(52),
+              decoration: boxDecoration(
                 // color: AppColors.kGreen,
-                borderRadius: BorderRadius.circular(11),
-                image: DecorationImage(image: AssetImage(isCompleted ? DefaultImages.greenBadgesIcon : DefaultImages.greyBadgesIcon)),
+                radius: 11,
+                decorationImage: DecorationImage(image: AssetImage(isCompleted ? DefaultImages.greenBadgesIcon : DefaultImages.greyBadgesIcon)),
               ),
               // padding: EdgeInsets.fromLTRB(17, Get.height * 0.020, 17, 2),
               child: Padding(

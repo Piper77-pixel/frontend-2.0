@@ -1,3 +1,4 @@
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,7 +51,7 @@ class CustomTabBar<K extends Object, V extends String> extends StatelessWidget {
       return Container(
         constraints: BoxConstraints.tightFor(width: containerSize.width, height: containerSize.height),
         clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(color: backgroundColor, borderRadius: borderRadius),
+        decoration: boxDecoration(color: backgroundColor, borderRadius: borderRadius),
         child: Opacity(
           opacity: 1,
           child: Stack(
@@ -66,7 +67,7 @@ class CustomTabBar<K extends Object, V extends String> extends StatelessWidget {
                   child: Container(
                     margin: EdgeInsets.all(sliderOffset),
                     decoration: sliderDecoration ??
-                        BoxDecoration(
+                        boxDecoration(
                           color: sliderColor,
                           borderRadius: borderRadius.subtract(BorderRadius.all(Radius.circular(sliderOffset))),
                           boxShadow: shadow,

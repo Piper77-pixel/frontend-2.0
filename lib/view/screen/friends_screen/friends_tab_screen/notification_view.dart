@@ -1,5 +1,6 @@
 import 'package:brain_bucks/core/controller/friends_list_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
@@ -30,7 +31,7 @@ class NotificationView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
-        decoration: BoxDecoration(color: AppColors.kBlack, borderRadius: BorderRadius.circular(AppDimen.buttonRadius)),
+        decoration: boxDecoration(color: AppColors.kBlack, radius:AppDimen.buttonRadius),
         padding: EdgeInsets.all(AppDimen.padding),
         child: Row(
           children: [

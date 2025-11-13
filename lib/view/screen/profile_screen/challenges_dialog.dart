@@ -2,9 +2,11 @@ import 'dart:ui';
 
 import 'package:brain_bucks/core/controller/profile_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/login.dart';
 import 'package:brain_bucks/view/widgets/common_button.dart';
@@ -28,11 +30,11 @@ class ChallengesDialog extends StatelessWidget {
         insetPadding: EdgeInsets.all(AppDimen.padding),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimen.radius)),
         content: Container(
-          width: Get.width,
-          decoration: BoxDecoration(
+          width: SizeConfig.screenWidth,
+          decoration: boxDecoration(
             color: AppColors.kBackGround,
-            borderRadius: BorderRadius.circular(AppDimen.smallRadius),
-            image: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
+            radius: AppDimen.smallRadius,
+            decorationImage: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
           ),
           padding: EdgeInsets.all(AppDimen.padding),
           child: Column(
@@ -61,9 +63,9 @@ class ChallengesDialog extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
         height: 70,
-        decoration: BoxDecoration(
+        decoration: boxDecoration(
           color: AppColors.kBlack,
-          borderRadius: BorderRadius.circular(8),
+          radius:8,
           border: GradientBoxBorder(
             gradient: SweepGradient(
               colors: isPlay == true

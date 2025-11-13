@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/view/screen/dashboard_manager/dashboard_manager.dart';
 import 'package:brain_bucks/view/screen/games_screen/duel_game/duel_time_out_dialog.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
@@ -24,11 +26,11 @@ class AbandonedDialog extends StatelessWidget {
         insetPadding: EdgeInsets.all(AppDimen.padding),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimen.radius)),
         content: Container(
-          width: Get.width,
-          decoration: BoxDecoration(
+          width: SizeConfig.screenWidth,
+          decoration: boxDecoration(
             color: AppColors.kBackGround,
-            borderRadius: BorderRadius.circular(AppDimen.smallRadius),
-            image: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
+            radius: AppDimen.smallRadius,
+            decorationImage: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
           ),
           padding: EdgeInsets.all(AppDimen.padding),
           child: Column(

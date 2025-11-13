@@ -1,5 +1,6 @@
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,8 +19,8 @@ class BgImageWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.kBackGround,
       body: Container(
-        height: Get.height,
-        width: Get.width,
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
         padding: padding,
         decoration: BoxDecoration(
           image: DecorationImage(image: AssetImage(bgImage??DefaultImages.bgImage), fit: BoxFit.fill),

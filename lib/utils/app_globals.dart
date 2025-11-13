@@ -13,6 +13,7 @@ showMessage(String message) {
   //   print(message);
   // }
 }
+
 List questionGeneralBank = [
   {
     'question': 'What is the capital city of Australia?',
@@ -209,6 +210,7 @@ SystemUiOverlayStyle buildSystemUiOverlayStyle() {
     statusBarBrightness: Brightness.dark,
   );
 }
+
 void navigatePushAndRemoveUntil(BuildContext context, Widget screen) async {
   Navigator.pushAndRemoveUntil(
     context,

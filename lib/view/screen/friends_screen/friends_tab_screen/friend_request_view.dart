@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:brain_bucks/utils/colors.dart';
@@ -74,7 +75,7 @@ class _FriendRequestViewState extends State<FriendRequestView> {
                   // Blurred container (only this part is blurred)
                   friendsListController.isSearch.value
                       ? Container(
-                          decoration: BoxDecoration(color: AppColors.kBackGround, borderRadius: BorderRadius.circular(16)),
+                          decoration: boxDecoration(color: AppColors.kBackGround, radius: 16),
                           padding: const EdgeInsets.all(8),
                           child: friendsListController.filteredUsers.isEmpty
                               ? SizedBox()
@@ -105,7 +106,7 @@ class _FriendRequestViewState extends State<FriendRequestView> {
       child: Container(
         height: 40,
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 11),
-        decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(AppDimen.buttonRadius)),
+        decoration: boxDecoration(color: bgColor, radius: AppDimen.buttonRadius),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
@@ -115,7 +116,7 @@ class _FriendRequestViewState extends State<FriendRequestView> {
                 Container(
                   height: 24,
                   width: 24,
-                  decoration: BoxDecoration(
+                  decoration: boxShapeDecoration(
                     color: AppColors.kBlack,
                     shape: BoxShape.circle,
                     border: GradientBoxBorder(gradient: LinearGradient(colors: [AppColors.kHex60148C, AppColors.kHexC674F7] /*begin: Alignment.topRight, end: Alignment.bottomCenter*/), width: 1.36),

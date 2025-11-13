@@ -1,6 +1,8 @@
 import 'package:brain_bucks/core/controller/game_controller/quiz_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/constant.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/games_screen/games_screen.dart';
 import 'package:brain_bucks/view/screen/home_screen/home_profile_appbar.dart';
@@ -76,9 +78,11 @@ class _DuelVsScreenState extends State<DuelVsScreen> with TickerProviderStateMix
 
   Widget appBarWidget(String coin, String spark) {
     return Container(
-      height: Get.height * 0.123,
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(DefaultImages.duelVsAppbarImage), fit: BoxFit.fill),
+      // height: Get.height * 0.123,
+      height: SizeConfig.h(100),
+      decoration: boxDecoration(
+        radius: 0,
+        decorationImage: DecorationImage(image: AssetImage(DefaultImages.duelVsAppbarImage), fit: BoxFit.fill),
       ),
       padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
       child: Row(
@@ -92,7 +96,7 @@ class _DuelVsScreenState extends State<DuelVsScreen> with TickerProviderStateMix
 
 Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, level2, friendName}) {
   return Padding(
-    padding: EdgeInsets.only(top: Get.height * 0.064),
+    padding: EdgeInsets.only(top: SizeConfig.h(51)),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -100,15 +104,15 @@ Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, l
           padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
           child: Container(
             // height: Get.height * 0.23,
-            width: Get.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(0),
-              image: DecorationImage(image: AssetImage(DefaultImages.myProfileBgImage), fit: BoxFit.fill),
+            width: SizeConfig.screenWidth,
+            decoration: boxDecoration(
+              radius: 0,
+              decorationImage: DecorationImage(image: AssetImage(DefaultImages.myProfileBgImage), fit: BoxFit.fill),
             ),
-            padding: EdgeInsets.symmetric(vertical: Get.height * 0.02),
+            padding: EdgeInsets.symmetric(vertical: SizeConfig.h(16)),
             child: Column(
               children: [
-                profileWidget(profileImage1, Size(Get.width * 0.25, Get.height * 0.116), padding: 0), //95
+                profileWidget(profileImage1, Size(SizeConfig.w(93), SizeConfig.h(94)), padding: 0), //95
                 verticalSpace(9),
                 Text(AppString.kYou.tr, style: pRobotoMedium10.copyWith(fontSize: 22)),
                 Text('${AppString.kLevel.tr} $level1', style: pRobotoMedium10.copyWith(fontSize: 15, color: AppColors.kWhite.withOpacity(0.4))),
@@ -116,20 +120,20 @@ Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, l
             ),
           ),
         ),
-        assetImage(DefaultImages.circleVsImage, h: Get.height * 0.12, w: Get.width),
+        assetImage(DefaultImages.circleVsImage, h: SizeConfig.h(97), w: SizeConfig.screenWidth),
         Padding(
           padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
           child: Container(
             // height: Get.height * 0.23,
-            width: Get.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(0),
-              image: DecorationImage(image: AssetImage(DefaultImages.friendProfileBgImage), fit: BoxFit.fill),
+            width: SizeConfig.screenWidth,
+            decoration: boxDecoration(
+              radius: 0,
+              decorationImage: DecorationImage(image: AssetImage(DefaultImages.friendProfileBgImage), fit: BoxFit.fill),
             ),
-            padding: EdgeInsets.symmetric(vertical: Get.height * 0.02),
+            padding: EdgeInsets.symmetric(vertical: SizeConfig.h(16)),
             child: Column(
               children: [
-                profileWidget(profileImage2, Size(Get.width * 0.25, Get.height * 0.116), color: AppColors.kHex2A5510, padding: 0), //95
+                profileWidget(profileImage2, Size(SizeConfig.w(93), SizeConfig.h(94)), color: AppColors.kHex2A5510, padding: 0), //95
                 verticalSpace(9),
                 Text(friendName!, style: pRobotoMedium10.copyWith(fontSize: 22)),
                 Text('${AppString.kLevel.tr} $level2', style: pRobotoMedium10.copyWith(fontSize: 15, color: AppColors.kWhite.withOpacity(0.4))),
@@ -138,14 +142,15 @@ Widget duelVsViewWidget({String? profileImage1, level1, String? profileImage2, l
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(16, 0 /*Get.height*0.057*/, 16, Get.height * 0.045),
+          padding: EdgeInsets.fromLTRB(16, 0 /*Get.height*0.057*/, 16, SizeConfig.h(36)),
           child: CommonThemeButton(
-            title: AppString.kCancel.tr,
+            title: AppString.kCancel.tr.toUpperCase(),
             isBlack: true,
             onPressed: () {
               Get.back();
             },
-            height: 40,
+            height: SizeConfig.h(40),
+            fontSize: 16,
           ),
         ),
       ],

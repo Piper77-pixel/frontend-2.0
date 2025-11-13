@@ -1,3 +1,5 @@
+import 'package:brain_bucks/utils/box_decoration.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/view/screen/auth/forgot_password.dart';
 import 'package:brain_bucks/core/controller/auth_controller.dart';
 import 'package:brain_bucks/view/screen/auth/get_code.dart';
@@ -24,11 +26,11 @@ showLoginSignupDialog(BuildContext context) {
           insetPadding: EdgeInsets.all(AppDimen.padding),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimen.radius)),
           content: Container(
-            width: Get.width,
-            decoration: BoxDecoration(
+            width: SizeConfig.screenWidth,
+            decoration: boxDecoration(
               color: AppColors.kBackGround,
-              borderRadius: BorderRadius.circular(AppDimen.smallRadius),
-              image: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
+              radius: AppDimen.smallRadius,
+              decorationImage: DecorationImage(image: AssetImage(DefaultImages.dialogBgImage), fit: BoxFit.fill),
             ),
             padding: EdgeInsets.all(AppDimen.padding),
             child: AuthView(),
@@ -54,7 +56,6 @@ class _AuthViewState extends State<AuthView> {
     // TODO: implement initState
     super.initState();
     authController.clear();
-
   }
 
   @override

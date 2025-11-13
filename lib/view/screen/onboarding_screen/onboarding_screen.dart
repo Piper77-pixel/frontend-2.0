@@ -1,9 +1,11 @@
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/icons.dart';
 import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/prefer.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/dashboard_manager/dashboard_manager.dart';
 import 'package:brain_bucks/view/screen/onboarding_screen/onboarding1.dart';
@@ -64,7 +66,7 @@ class OnBoardingScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(32, Get.height * 0.072, 32, Get.height * 0.02),
+                  padding: EdgeInsets.fromLTRB(32, SizeConfig.h(58), 32, SizeConfig.h(16)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -82,7 +84,7 @@ class OnBoardingScreen extends StatelessWidget {
                         child: Container(
                           height: 90,
                           width: 90,
-                          decoration: BoxDecoration(image: DecorationImage(image: AssetImage(DefaultImages.onboardingBtnImage))),
+                          decoration: boxDecoration(radius: 0,decorationImage: DecorationImage(image: AssetImage(DefaultImages.onboardingBtnImage))),
                           child: Center(child: Icon(onboardingController.currentIndex.value == onboardingController.onboardingData.length - 1 ? icnDone : icnNext, color: AppColors.kWhite)),
                         ),
                       ),
@@ -103,6 +105,7 @@ class OnBoardingScreen extends StatelessWidget {
       alignment: AlignmentGeometry.topRight,
       child: GestureDetector(
         onTap: () {
+          Prefs.setONBOARDING(true);
           navigatePushAndRemoveUntil(context, DashboardManager());
         },
         child: Padding(
@@ -137,7 +140,7 @@ class DotIndicator extends StatelessWidget {
           width: index == currentIndex ? 32 : 6,
           height: 6,
           margin: EdgeInsets.symmetric(horizontal: 4), // Adjust spacing
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: index == currentIndex ? AppColors.kHex7C10F9 : AppColors.kWhite),
+          decoration: boxDecoration(radius:4, color: index == currentIndex ? AppColors.kHex7C10F9 : AppColors.kWhite),
         );
       }),
     );

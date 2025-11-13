@@ -1,7 +1,9 @@
 import 'package:brain_bucks/core/controller/challenges_controller.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/challenge_screen/challenge_widget.dart';
 import 'package:brain_bucks/view/screen/home_screen/home_screen_widgets.dart';
@@ -58,14 +60,14 @@ class ChallengeScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Container(
-                      height: Get.height * 0.157,
+                      height: SizeConfig.h(128),
                       // height: 128,
-                      width: Get.width,
+                      width: SizeConfig.screenWidth,
                       padding: EdgeInsets.fromLTRB(12, 4, 8, 0),
-                      decoration: BoxDecoration(
+                      decoration: boxDecoration(
                         color: AppColors.kThemeColor,
-                        borderRadius: BorderRadiusGeometry.circular(12),
-                        image: DecorationImage(image: AssetImage(DefaultImages.challengeExpireBgImage), fit: BoxFit.fill),
+                        radius: 12,
+                        decorationImage: DecorationImage(image: AssetImage(DefaultImages.challengeExpireBgImage), fit: BoxFit.fill),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -116,5 +118,4 @@ class ChallengeScreen extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:brain_bucks/utils/box_decoration.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/games_screen/duel_game/claim_reward_dialog.dart';
 import 'package:brain_bucks/view/screen/games_screen/duel_game/duel_time_out_dialog.dart';
@@ -31,11 +33,11 @@ class DuelYouWinDialog extends StatelessWidget {
           alignment: Alignment.topRight - Alignment(0.2, .031),
           children: [
             Container(
-              width: Get.width,
-              decoration: BoxDecoration(
+              width: SizeConfig.screenWidth,
+              decoration: boxDecoration(
                 color: AppColors.kBackGround,
-                borderRadius: BorderRadius.circular(AppDimen.smallRadius),
-                image: DecorationImage(image: AssetImage(DefaultImages.duelWinDialogBgImage), fit: BoxFit.fill),
+                radius: AppDimen.smallRadius,
+                decorationImage: DecorationImage(image: AssetImage(DefaultImages.duelWinDialogBgImage), fit: BoxFit.fill),
               ),
               padding: EdgeInsets.all(AppDimen.padding),
               child: Column(
@@ -48,13 +50,13 @@ class DuelYouWinDialog extends StatelessWidget {
                       onTap: () {
                         Get.offAll(() => DashboardManager());
                       },
-                      child: assetImage(DefaultImages.closeIcon, h: Get.height * 0.039, w: Get.height * 0.039),
+                      child: assetImage(DefaultImages.closeIcon, h: SizeConfig.h(32), w: SizeConfig.w(32)),
                     ),
                   ),
-                  Center(child: assetImage(DefaultImages.youWinTxtImage, h: Get.height * 0.051)), //42
+                  Center(child: assetImage(DefaultImages.youWinTxtImage, h: SizeConfig.h(42))), //42
                   verticalSpace(0),
-                  Center(child: assetImage(DefaultImages.hardIcon, h: Get.height * 0.044)), //36
-                  verticalSpace(Get.height * 0.008),
+                  Center(child: assetImage(DefaultImages.hardIcon, h: SizeConfig.h(36))), //36
+                  verticalSpace(SizeConfig.h(6)),
                   //12
                   profileStreakWidget(
                     profileImage: DefaultImages.profileImage,
@@ -67,7 +69,7 @@ class DuelYouWinDialog extends StatelessWidget {
                     hScore: '3,500',
                     progressValue: 0.50,
                   ),
-                  verticalSpace(Get.height * 0.014), //12
+                  verticalSpace(SizeConfig.h(12)), //12
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +87,7 @@ class DuelYouWinDialog extends StatelessWidget {
                       children: [
                         Container(
                           // color: Colors.blue,
-                          child: assetImage(DefaultImages.achievementCircleImage, h: Get.height * 0.2, fit: BoxFit.fill),
+                          child: assetImage(DefaultImages.achievementCircleImage, h: SizeConfig.h(162), fit: BoxFit.fill),
                         ),
                         assetImage(DefaultImages.achievementNameTxtImage, h: 16),
                       ],
@@ -94,10 +96,10 @@ class DuelYouWinDialog extends StatelessWidget {
 
                   // verticalSpace(8),
                   shareOnWidget(actionFacebook: () {}, actionInstagram: () {}, actionTelegram: () {}, actionTwitter: () {}),
-                  verticalSpace(Get.height * 0.012), //12
+                  verticalSpace(SizeConfig.h(12)), //12
                   CommonThemeButton(
                     title: AppString.kCollect.tr,
-                    height: Get.height * 0.063,
+                    height: SizeConfig.h(51),
                     onPressed: () {
                       Get.back();
                       handleAClaimRewardDialog(context, () {
@@ -112,10 +114,10 @@ class DuelYouWinDialog extends StatelessWidget {
             Stack(
               alignment: Alignment.center - Alignment(-.2, 0.1),
               children: [
-                assetImage(DefaultImages.sessionCompletedImage, h: Get.height * 0.1, w: Get.width * 0.21, fit: BoxFit.fill),
+                assetImage(DefaultImages.sessionCompletedImage, h: SizeConfig.h(83), w: SizeConfig.w(81), fit: BoxFit.fill),
                 Text(
                   AppString.kSessionCompleted.tr,
-                  style: pNunitoExtraBold10.copyWith(fontSize: Get.height * 0.015),
+                  style: pNunitoExtraBold10.copyWith(fontSize: SizeConfig.sp(12)),
                   textAlign: TextAlign.center,
                 ),
               ],

@@ -1,7 +1,9 @@
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
 import 'package:brain_bucks/utils/prefer.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/auth/show_auth_dialog.dart';
 import 'package:brain_bucks/view/screen/friends_screen/friends_list_screen.dart';
@@ -24,13 +26,15 @@ class HomeProfileAppbar extends StatelessWidget {
       children: [
         Container(
           // height: 150,
-          height: Get.height * 0.18,
-          width: Get.width,
-          decoration: BoxDecoration(
+          // height: Get.height * 0.18,
+          height: SizeConfig.h(146),
+          width: SizeConfig.screenWidth,
+          decoration: boxDecoration(
             // color: Colors.red,
-            image: DecorationImage(image: AssetImage(DefaultImages.appbarBgImage), fit: BoxFit.fill),
+            radius: 0,
+            decorationImage: DecorationImage(image: AssetImage(DefaultImages.appbarBgImage), fit: BoxFit.fill),
           ),
-          padding: EdgeInsets.fromLTRB(32, 0, 30, Get.height * 0.03),
+          padding: EdgeInsets.fromLTRB(32, 0, 30, SizeConfig.h(24)),
           child: SafeArea(
             child: Center(
               child: Row(
@@ -54,7 +58,7 @@ class HomeProfileAppbar extends StatelessWidget {
         ),
         SafeArea(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, Get.height * 0.025),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, SizeConfig.h(20)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -74,14 +78,14 @@ Container profileWidget(image, Size? size, {Color? color, double? padding}) {
   return Container(
     width: size!.width,
     height: size.height,
-    decoration: BoxDecoration(color: color ?? AppColors.kHex602F7B, shape: BoxShape.circle),
+    decoration: boxShapeDecoration(color: color ?? AppColors.kHex602F7B, shape: BoxShape.circle),
     padding: EdgeInsets.all(padding ?? 2),
     child: Container(
-      decoration: BoxDecoration(
+      decoration: boxShapeDecoration(
         color: color ?? AppColors.kThemeColor,
         shape: BoxShape.circle,
         border: Border.all(color: color ?? AppColors.kThemeColor, width: 2),
-        image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
+        decorationImage: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
       ),
     ),
   );
@@ -89,9 +93,9 @@ Container profileWidget(image, Size? size, {Color? color, double? padding}) {
 
 Widget coinWidget(String title) {
   return Container(
-    decoration: BoxDecoration(
+    decoration: boxDecoration(
       gradient: LinearGradient(colors: AppColors.linerCoinColor, begin: AlignmentGeometry.topCenter, end: AlignmentGeometry.bottomCenter),
-      borderRadius: BorderRadius.circular(40),
+      radius: 40,
     ),
     padding: EdgeInsets.symmetric(vertical: 3, horizontal: 8),
     child: Row(
@@ -108,9 +112,9 @@ Widget signupWidget(Function() onTap) {
   return GestureDetector(
     onTap: onTap,
     child: Container(
-      decoration: BoxDecoration(
+      decoration: boxDecoration(
         gradient: LinearGradient(colors: AppColors.linerCoinColor, begin: AlignmentGeometry.topCenter, end: AlignmentGeometry.bottomCenter),
-        borderRadius: BorderRadius.circular(40),
+        radius: 40,
       ),
       padding: EdgeInsets.symmetric(vertical: 3, horizontal: 8),
       child: Text(AppString.kSignUp.tr, style: pNunitoExtraBold10.copyWith(fontSize: 11)),

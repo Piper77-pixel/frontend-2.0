@@ -1,5 +1,7 @@
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:brain_bucks/view/widgets/icon_image_widget.dart';
@@ -8,13 +10,14 @@ import 'package:get/get.dart';
 
 Widget challengeAppBar(String title) {
   return Container(
-    height: Get.height * 0.145,
-    width: Get.width,
-    decoration: BoxDecoration(
-      // color: Colors.red,
-      image: DecorationImage(image: AssetImage(DefaultImages.appbarBgImage), fit: BoxFit.fill),
+    // height: Get.height * 0.145,
+    height: SizeConfig.h(118),
+    width: SizeConfig.screenWidth,
+    decoration: boxDecoration(
+      radius: 0,
+      decorationImage: DecorationImage(image: AssetImage(DefaultImages.appbarBgImage), fit: BoxFit.fill),
     ),
-    padding: EdgeInsets.fromLTRB(32, 0, 30, Get.height * 0.03),
+    padding: EdgeInsets.fromLTRB(32, 0, 30, SizeConfig.h(24)),
     child: SafeArea(
       child: Center(child: Text(title, style: pNunitoBold10.copyWith(fontSize: 20))),
     ),
@@ -28,17 +31,17 @@ Widget stageUserWidget({String? profileImage, profileImage1, profileImage2, name
     children: [
       Container(child: assetImage(DefaultImages.challengeStageImage, w: 124)),
       Positioned(
-        bottom: Get.height * 0.062, //-45,
+        bottom: SizeConfig.h(51), //-45,
         left: 2,
         child: buildTopThreeDataWidget(profileImage: profileImage, name: name, total: total, isShowCrown: false),
       ),
       Positioned(
-        bottom: Get.height * 0.073, //-75,
+        bottom: SizeConfig.h(60), //-75,
         left: 50,
         child: buildTopThreeDataWidget(profileImage: profileImage1, name: name1, total: total1, isShowCrown: true),
       ),
       Positioned(
-        bottom: Get.height * 0.045, //-75,
+        bottom: SizeConfig.h(37), //-75,
         right: 2,
         child: buildTopThreeDataWidget(profileImage: profileImage2, name: name2, total: total2, isShowCrown: false),
       ),
@@ -57,8 +60,8 @@ buildTopThreeDataWidget({String? profileImage, String? name, String? total, bool
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Container(
-              height: Get.height * 0.025,
-              width: Get.width * 0.055,
+              height: SizeConfig.h(21),
+              width: SizeConfig.w(21),
               decoration: BoxDecoration(
                 color: Colors.red,
                 image: DecorationImage(image: NetworkImage(profileImage!), fit: BoxFit.cover),

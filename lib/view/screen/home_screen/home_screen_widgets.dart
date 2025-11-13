@@ -1,6 +1,8 @@
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/widgets/common_button.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
@@ -12,14 +14,13 @@ Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, to
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 8.0),
     child: Container(
-      height: Get.height * 0.157,
-      //      height: 128,
-      width: Get.width,
+      // height: Get.height * 0.157,
+      height: SizeConfig.h(127),
+      width: SizeConfig.screenWidth,
       padding: EdgeInsets.fromLTRB(12, 12, 16, 12),
-      decoration: BoxDecoration(
+      decoration: boxDecoration(
         color: AppColors.kThemeColor,
-        borderRadius: BorderRadiusGeometry.circular(12),
-        image: DecorationImage(image: AssetImage(bgImage!), fit: BoxFit.cover),
+        decorationImage: DecorationImage(image: AssetImage(bgImage!), fit: BoxFit.cover),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,8 +48,8 @@ Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, to
             child: Container(
               height: 35,
               width: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
+              decoration: boxDecoration(
+                radius: 8,
                 color: isEnable == false ? AppColors.kAnswerBg : null,
                 gradient: isEnable == true ? LinearGradient(colors: AppColors.linerBtnColor, begin: Alignment.topLeft, end: Alignment.bottomRight) : null,
               ),
@@ -74,21 +75,21 @@ Widget summerChallengeWidget({String? days, hour, minutes, second, totalCoin, to
   );
 }
 
-Widget shadowCoinWidget(String total, {bool isSpark = false, bool isIcon = true, double? font, double? icon, double? height, String? bg,String?iconImage}) {
+Widget shadowCoinWidget(String total, {bool isSpark = false, bool isIcon = true, double? font, double? icon, double? height, String? bg, String? iconImage}) {
   return Container(
     height: height ?? 24,
     // width: 60,
-    decoration: BoxDecoration(
+    decoration: boxDecoration(
       // color: AppColors.kBlack.withOpacity(0.15),
-      borderRadius: BorderRadius.circular(35),
-      image: DecorationImage(image: AssetImage(bg ?? (isSpark ? DefaultImages.sparkBgImage : DefaultImages.coinBgImage)), fit: BoxFit.fill),
+      radius: 35,
+      decorationImage: DecorationImage(image: AssetImage(bg ?? (isSpark ? DefaultImages.sparkBgImage : DefaultImages.coinBgImage)), fit: BoxFit.fill),
     ),
     padding: EdgeInsets.fromLTRB(2, 5, 8, 5),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        isIcon ? assetImage(iconImage??(isSpark ? DefaultImages.sparkIcon : DefaultImages.coinIcon), w: icon ?? 20, h: icon ?? 20) : SizedBox(),
+        isIcon ? assetImage(iconImage ?? (isSpark ? DefaultImages.sparkIcon : DefaultImages.coinIcon), w: icon ?? 20, h: icon ?? 20) : SizedBox(),
         Text(total, style: pNunitoExtraBold10.copyWith(fontSize: font ?? 10)),
       ],
     ),
@@ -99,7 +100,7 @@ Widget timeBox({String? time, String? title}) {
   return Container(
     height: 36,
     width: 36,
-    decoration: BoxDecoration(color: AppColors.kHex2D1037, borderRadius: BorderRadius.circular(4)),
+    decoration: boxDecoration(color: AppColors.kHex2D1037, radius: 4),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

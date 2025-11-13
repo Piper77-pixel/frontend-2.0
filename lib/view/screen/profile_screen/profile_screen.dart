@@ -1,9 +1,11 @@
 import 'package:brain_bucks/core/controller/profile_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/icons.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/friends_screen/friends_profile_screen.dart';
 import 'package:brain_bucks/view/screen/home_screen/home_profile_appbar.dart';
@@ -38,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
             child: ListView(
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.fromLTRB(16, Get.height*0.026, 16, 20),
+              padding: EdgeInsets.fromLTRB(16, SizeConfig.h(21), 16, 20),
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -59,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
                   radius: BorderRadius.only(topLeft: Radius.elliptical(10, 20), topRight: Radius.elliptical(15, 40)),
                   imageRadius: BorderRadius.only(topLeft: Radius.elliptical(10, 20), topRight: Radius.elliptical(15, 40)),
                 ),
-                verticalSpace(Get.height * 0.036), //32
+                verticalSpace(SizeConfig.h(32)), //32
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
@@ -75,7 +77,7 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                verticalSpace(Get.height * 0.018), //16
+                verticalSpace(SizeConfig.h(16)), //16
                 taskWidget(image: DefaultImages.taskIcon, title: AppString.kTasks.tr, actionOnTap: () {}),
                 taskWidget(
                   image: DefaultImages.gameplayIcon,
@@ -98,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
                     handleADialog(context, ChallengesDialog());
                   },
                 ),
-                verticalSpace(54),
+                verticalSpace(SizeConfig.h(54)),
               ],
             ),
           ),
@@ -118,40 +120,42 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-  Widget taskWidget({String? image, title,double?space, bool isIcon = false, Function()? actionOnTap, bool isText = false, String? text}) {
-    return Padding(
-      padding:  EdgeInsets.only(bottom: Get.height*0.014),
-      child: GestureDetector(
-        onTap: actionOnTap,
-        child: Container(
-          height: Get.height * 0.062,
-          //54
-          width: Get.width,
-          decoration: BoxDecoration(color: AppColors.kHex161616, borderRadius: BorderRadius.circular(AppDimen.buttonRadius)),
-          padding: EdgeInsets.all(8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    height: Get.height * 0.045,
-                    width: Get.width * 0.098,
-                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage(DefaultImages.taskIconBgIcon))),
-                    child: Align(child: assetImage(image!, h: 30)),
-                  ),
-                  horizontalSpace(space??2),
-                  Text(title!, style: pNunitoExtraBold10.copyWith(fontSize: 18)),
-                ],
-              ),
-              isText ? Text(text!, style: pNunitoBold10.copyWith(fontSize: 16)) : assetImage(isIcon ? DefaultImages.arrowRightIcon : DefaultImages.arrowNextIcon, h: 20, w: 32),
-            ],
-          ),
+
+Widget taskWidget({String? image, title, double? space, bool isIcon = false, Function()? actionOnTap, bool isText = false, String? text}) {
+  return Padding(
+    padding: EdgeInsets.only(bottom: SizeConfig.h(12)),
+    child: GestureDetector(
+      onTap: actionOnTap,
+      child: Container(
+        height: SizeConfig.h(52),
+        //54
+        width: SizeConfig.screenWidth,
+        decoration: boxDecoration(color: AppColors.kHex161616, radius: AppDimen.buttonRadius),
+        padding: EdgeInsets.all(8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Container(
+                  height: SizeConfig.h(36),
+                  width: SizeConfig.w(36),
+                  decoration: boxDecoration(radius: 0, decorationImage: DecorationImage(image: AssetImage(DefaultImages.taskIconBgIcon))),
+                  child: Align(child: assetImage(image!, h: 30)),
+                ),
+                horizontalSpace(space ?? 2),
+                Text(title!, style: pNunitoExtraBold10.copyWith(fontSize: SizeConfig.sp(18))),
+              ],
+            ),
+            isText
+                ? Text(text!, style: pNunitoBold10.copyWith(fontSize: SizeConfig.sp(16)))
+                : assetImage(isIcon ? DefaultImages.arrowRightIcon : DefaultImages.arrowNextIcon, h: SizeConfig.h(20), w: SizeConfig.w(32)),
+          ],
         ),
       ),
-    );
-  }
-
+    ),
+  );
+}
 
 class ProfileAppbar extends StatelessWidget {
   final String profileName;
@@ -167,12 +171,15 @@ class ProfileAppbar extends StatelessWidget {
       alignment: Alignment.center - Alignment(0, -0.5),
       children: [
         Container(
-          height: Get.height * 0.23,
-          width: Get.width,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(DefaultImages.friendsAppbarImage), fit: BoxFit.fill),
+          // height: Get.height * 0.23,
+          height: SizeConfig.h(190),
+          width: SizeConfig.screenWidth,
+          decoration: boxDecoration(
+            radius: 0,
+            decorationImage: DecorationImage(image: AssetImage(DefaultImages.friendsAppbarImage), fit: BoxFit.fill),
           ),
-          padding: EdgeInsets.fromLTRB(16, 0, 16, Get.height * 0.12),
+          padding: EdgeInsets.fromLTRB(16, 0, 16, SizeConfig.h(100)),
+          //Get.height * 0.12
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -184,9 +191,9 @@ class ProfileAppbar extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              profileWidget(profileImage, Size(Get.width * 0.25, Get.height * 0.116)), //95
+              profileWidget(profileImage, Size(SizeConfig.w(94), SizeConfig.h(95))), //95
               verticalSpace(4),
-              Text(profileName, style: pRobotoMedium10.copyWith(fontSize: Get.width * 0.05)), //20
+              Text(profileName, style: pRobotoMedium10.copyWith(fontSize: SizeConfig.sp(20))), //20
               verticalSpace(4),
               Text('${AppString.kLevel.tr} $level', style: pRobotoMedium10.copyWith(fontSize: 14, color: AppColors.kWhite.withOpacity(0.4))),
             ],

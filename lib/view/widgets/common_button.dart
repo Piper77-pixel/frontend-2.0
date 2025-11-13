@@ -1,3 +1,4 @@
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/view/widgets/common_space_divider_widget.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
 import 'package:brain_bucks/utils/text_style.dart';
@@ -53,7 +54,7 @@ class CommonThemeButton extends StatelessWidget {
         pressedOpacity: 0.2,
         onPressed: onPressed,
         child: Container(
-          width: width ?? Get.width,
+          width: width ?? SizeConfig.screenWidth,
           height: height ?? 56,
           decoration: BoxDecoration(
             // color: btnColor ?? AppColors.kThemeColor,
@@ -134,7 +135,7 @@ class CommonButton extends StatelessWidget {
       pressedOpacity: 0.2,
       onPressed: onPressed,
       child: Container(
-        width: width ?? Get.width,
+        width: width ?? SizeConfig.screenWidth,
         height: height ?? 45,
         decoration: BoxDecoration(
           color: btnColor ?? AppColors.kThemeColor,

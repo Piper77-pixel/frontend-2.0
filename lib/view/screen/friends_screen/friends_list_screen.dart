@@ -1,8 +1,10 @@
 import 'package:brain_bucks/core/controller/friends_list_controller.dart';
 import 'package:brain_bucks/utils/app_globals.dart';
+import 'package:brain_bucks/utils/box_decoration.dart';
 import 'package:brain_bucks/utils/colors.dart';
 import 'package:brain_bucks/utils/constant.dart';
 import 'package:brain_bucks/utils/images.dart';
+import 'package:brain_bucks/utils/size_config.dart';
 import 'package:brain_bucks/utils/text_style.dart';
 import 'package:brain_bucks/view/screen/friends_screen/friends_tab_screen/friends_list_view.dart';
 import 'package:brain_bucks/view/screen/friends_screen/friends_tab_screen/notification_view.dart';
@@ -60,9 +62,9 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
                       children: [
                         Container(
                           padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
+                          decoration: boxDecoration(
                             color: AppColors.kBlack,
-                            borderRadius: BorderRadius.circular(AppDimen.radius),
+                            radius: AppDimen.radius,
                             border: GradientBoxBorder(
                               gradient: LinearGradient(colors: AppColors.linerSelectedTextFieldBorderColor, begin: Alignment.topCenter, end: Alignment.bottomCenter),
                               width: 1,
@@ -73,8 +75,8 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
                             segments: friendsListController.segment.value,
                             backgroundColor: AppColors.kBlack,
                             itemPadding: EdgeInsetsGeometry.symmetric(vertical: 8, horizontal: 24),
-                            sliderDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(AppDimen.radius),
+                            sliderDecoration: boxDecoration(
+                              radius: AppDimen.radius,
                               gradient: LinearGradient(colors: [AppColors.kHex900FE6, AppColors.kHex6E05AB], begin: Alignment.topCenter, end: Alignment.bottomCenter),
                             ),
                             activeStyle: pRobotoMedium10.copyWith(fontSize: 14),
@@ -100,7 +102,7 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
       case 'request':
         return FriendRequestView();
       case 'friend_list':
-        return FriendsListView(isDuel: widget.isDuel,);
+        return FriendsListView(isDuel: widget.isDuel);
       case 'notification':
         return NotificationView();
     }
@@ -120,11 +122,12 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
 
 Widget backAppBar(String title) {
   return Container(
-    height: Get.height * 0.155,
-    width: Get.width,
-    decoration: BoxDecoration(
-      // color: Colors.red,
-      image: DecorationImage(image: AssetImage(DefaultImages.appbarBgImage), fit: BoxFit.fill),
+    // height: Get.height * 0.155,
+    height: SizeConfig.h(126),
+    width: SizeConfig.screenWidth,
+    decoration: boxDecoration(
+      radius: 0,
+      decorationImage: DecorationImage(image: AssetImage(DefaultImages.appbarBgImage), fit: BoxFit.fill),
     ),
     padding: EdgeInsets.fromLTRB(16, 0, 30, 0),
     child: SafeArea(
